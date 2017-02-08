@@ -1,5 +1,6 @@
 ## Weather Application
-Test task for iOS Developer position at STRW - Weather application
+Test task for iOS Developer position at STRV - Weather application.
+
 <b>My first application written in Swift.</b>
 
 ####Task
@@ -17,11 +18,13 @@ Make sure you consider and handle all possible states of the app (offline, data 
 All graphic elements and assets are located in "Description" folder as this document.
 
 ####Notes
-Serious problems (ignored - this app is for me only for education of Swift and RxSwift) 
-- App doesn't contain Firebase SDK
-- There is lot of missing images in resources from STRV 
-- There is lot of differences between screenshots and API content 
+Serious problems (ignored - this app is for me only for education of Swift and RxSwift):
+- App doesn't contain Firebase SDK.
+- There is lot of missing images in resources from STRV.
+- There is lot of differences between screenshots and API content.
 
 ####Posible improvements
-- Landscape mode of app
+- Landscape mode of app.
+- Forecast section.
+- Tests.
 
