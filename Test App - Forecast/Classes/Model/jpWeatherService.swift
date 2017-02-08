@@ -26,7 +26,7 @@ enum jpWeatherServiceError: Error {
     case noNetworkConnection
     case urlRequestProblem
     case unknownCity
-    case badDataFormat
+    case badDataFormat(detail: String)
     case localizationProblem
 }
 
@@ -44,22 +44,22 @@ class jpWeatherService: NSObject {
             return NSLocalizedString("WIND_DIRECTION_N", comment: "North");
         case 23...67:
             return NSLocalizedString("WIND_DIRECTION_NE", comment: "Northeast");
-        case 69...112:
+        case 68...112:
             return NSLocalizedString("WIND_DIRECTION_E", comment: "East");
-        case 115...157:
+        case 113...157:
             return NSLocalizedString("WIND_DIRECTION_SE", comment: "Southeast");
-        case 161...202:
+        case 158...202:
             return NSLocalizedString("WIND_DIRECTION_S", comment: "South");
-        case 207...247:
+        case 203...247:
             return NSLocalizedString("WIND_DIRECTION_SW", comment: "Southwest");
-        case 253...292:
+        case 248...292:
             return NSLocalizedString("WIND_DIRECTION_W", comment: "West");
-        case 299...337:
+        case 293...337:
             return NSLocalizedString("WIND_DIRECTION_NW", comment: "Northwest");
-        case 345...360:
+        case 338...360:
             return NSLocalizedString("WIND_DIRECTION_N", comment: "North");
         default:
-            throw jpWeatherServiceError.badDataFormat
+            throw jpWeatherServiceError.badDataFormat(detail: "Degree to direction problem")
         }
     }
     
@@ -78,54 +78,54 @@ class jpWeatherService: NSObject {
     
     private func sourceJsonToServiceStruct(json: [String:Any], city: jpLocationServiceCityAndLocation) throws -> jpWeatherServiceToday {
         guard let clouds = json["clouds"] as? [String: Any] else {
-            throw jpWeatherServiceError.badDataFormat
+            throw jpWeatherServiceError.badDataFormat(detail: "Missing 'clouds' folder")
         }
         
         guard let cloudness = clouds["all"] as? Int else {
-            throw jpWeatherServiceError.badDataFormat
+            throw jpWeatherServiceError.badDataFormat(detail: "Missing 'clouds:all' folder")
         }
         
         guard let main = json["main"] as? [String: Any] else {
-            throw jpWeatherServiceError.badDataFormat
+            throw jpWeatherServiceError.badDataFormat(detail: "Missing 'main' folder")
         }
         
         guard let humidity = main["humidity"] as? Int else {
-            throw jpWeatherServiceError.badDataFormat
+            throw jpWeatherServiceError.badDataFormat(detail: "Missing 'main:humidity' folder")
         }
         
         guard let pressure = main["pressure"] as? Int else {
-            throw jpWeatherServiceError.badDataFormat
+            throw jpWeatherServiceError.badDataFormat(detail: "Missing 'main:pressure' folder")
         }
         
         guard let temp = main["temp"] as? Double else {
-            throw jpWeatherServiceError.badDataFormat
+            throw jpWeatherServiceError.badDataFormat(detail: "Missing 'main:temp' folder")
         }
         
         guard let wind = json["wind"] as? [String: Any] else {
-            throw jpWeatherServiceError.badDataFormat
+            throw jpWeatherServiceError.badDataFormat(detail: "Missing 'wind' folder")
         }
         
         guard let windSpeed = wind["speed"] as? Double else {
-            throw jpWeatherServiceError.badDataFormat
+            throw jpWeatherServiceError.badDataFormat(detail: "Missing 'wind:speed' folder")
         }
         guard let windDeg = wind["deg"] as? Int else {
-            throw jpWeatherServiceError.badDataFormat
+            throw jpWeatherServiceError.badDataFormat(detail: "Missing 'wind:deg' folder")
         }
         
         guard let weather = json["weather"] as? [Any] else {
-            throw jpWeatherServiceError.badDataFormat
+            throw jpWeatherServiceError.badDataFormat(detail: "Missing 'weather' folder")
         }
         
         guard let weatherObj = weather[0] as? [String: Any] else {
-            throw jpWeatherServiceError.badDataFormat
+            throw jpWeatherServiceError.badDataFormat(detail: "Missing 'weather:0' folder")
         }
         
         guard let weatherDesc = weatherObj["main"] as? String else {
-            throw jpWeatherServiceError.badDataFormat
+            throw jpWeatherServiceError.badDataFormat(detail: "Missing 'weather:0:main' folder")
         }
         
         guard let weatherCode = weatherObj["icon"] as? String else {
-            throw jpWeatherServiceError.badDataFormat
+            throw jpWeatherServiceError.badDataFormat(detail: "Missing 'weather:0:icon' folder")
         }
         
         let weatherText: String = String(format: "%.1f%@ | %@", temp, NSLocalizedString("TEMP_UNIT_DC", comment: "Degrees Celsius"), weatherDesc)
@@ -176,7 +176,7 @@ class jpWeatherService: NSObject {
                         }
 
                         guard let data = data else {
-                            observer.on(.error(jpWeatherServiceError.badDataFormat))
+                            observer.on(.error(jpWeatherServiceError.badDataFormat(detail: "Data is nil")))
                             return
                         }
                         
@@ -184,8 +184,11 @@ class jpWeatherService: NSObject {
                             let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
                             observer.on(.next(try self.sourceJsonToServiceStruct(json: json, city: n)))
                             //observer.on(.completed)
+                        } catch let errorBDF as jpWeatherServiceError {
+                            observer.on(.error(errorBDF))
+                            return
                         } catch {
-                            observer.on(.error(jpWeatherServiceError.badDataFormat))
+                            observer.on(.error(jpWeatherServiceError.badDataFormat(detail: "Other problem")))
                             return
                         }
                     }

@@ -52,11 +52,14 @@ class jpTodayWeatherViewController: UIViewController {
             self.outputText = String(format: "%@: %@ - %@", NSLocalizedString("SHARE_MESSAGE_PREFIX", comment: "Share msg prefix"), n.cityName, n.tempWeather)
         },onError:{n in
             if let err = n as? jpWeatherServiceError {
-                if(err == jpWeatherServiceError.noNetworkConnection){
-                    let alert = UIAlertController(title: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TITLE", comment: "Error title"), message: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_NETWORK_TEXT", comment: "Error text"), preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: NSLocalizedString("WARNING_POPUPS_DISMISS_BUTTON", comment: "OK"), style: UIAlertActionStyle.destructive, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                    return
+                switch err {
+                    case .noNetworkConnection:
+                        let alert = UIAlertController(title: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TITLE", comment: "Error title"), message: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_NETWORK_TEXT", comment: "Error text"), preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("WARNING_POPUPS_DISMISS_BUTTON", comment: "OK"), style: UIAlertActionStyle.destructive, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        return
+                    default:
+                        break;
                 }
             }
             
