@@ -1,0 +1,35 @@
+/* 
+  Localizable.strings
+  Test App - Forecast
+
+  Created by Jakub on 03.02.17.
+  Copyright © 2017 Ponikelský Jakub. All rights reserved.
+*/
+"TODAY_VIEW_CONTROLLER_TITLE" = "Today";
+
+"WIND_DIRECTION_N" = "N";
+"WIND_DIRECTION_NE" = "NE";
+"WIND_DIRECTION_E" = "E";
+"WIND_DIRECTION_SE" = "SE";
+"WIND_DIRECTION_S" = "S";
+"WIND_DIRECTION_SW" = "SW";
+"WIND_DIRECTION_W" = "W";
+"WIND_DIRECTION_NW" = "NW";
+
+"WIND_SPEED_UNIT_MPS" = "m/s";
+
+"PRESSURE_UNIT_HPA" = "hPA";
+
+"TEMP_UNIT_DC" = "°C";
+
+"WARNING_POPUPS_DISMISS_BUTTON" = "OK";
+"WARNING_POPUPS_LOCALIZATION_DISABLED_TITLE" = "Disabled";
+"WARNING_POPUPS_LOCALIZATION_DISABLED_TEXT" = "Localisation service is disabled, please enable it.";
+"WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TITLE" = "Network problem";
+"WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TEXT" = "Data about weather can't be loaded.";
+"WARNING_POPUPS_DATA_CANNOT_BE_LOADED_NETWORK_TEXT" = "Please check internet connection.";
+
+"SHARE_DEFAULT_MESSAGE" = "WeatherMap";
+"SHARE_MESSAGE_PREFIX" = "WeatherMap";
+
+

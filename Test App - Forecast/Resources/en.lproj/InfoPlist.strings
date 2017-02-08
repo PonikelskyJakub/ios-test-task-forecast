@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  Test App - Forecast
+
+  Created by Jakub on 03.02.17.
+  Copyright © 2017 Ponikelský Jakub. All rights reserved.
+*/
+"NSLocationWhenInUseUsageDescription" = "We need your position for forecasting";
