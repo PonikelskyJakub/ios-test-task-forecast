@@ -9,6 +9,11 @@
 import UIKit
 
 extension UIImage {
+    /**
+     Scale UIImage to new width
+     - Parameter newWidth: new width value
+     - Returns: Image in new width
+     */
     func scaleImageToWidth (_ newWidth: CGFloat) -> UIImage? {
         let scale = newWidth / self.size.width
         let newHeight = self.size.height * scale

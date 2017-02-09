@@ -9,6 +9,10 @@
 import UIKit
 
 class jpForecastNavigationController: UINavigationController {
+    
+    /**
+     Constructor - init NVC, set bar design
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
 

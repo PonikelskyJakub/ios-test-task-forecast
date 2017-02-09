@@ -9,6 +9,10 @@
 import SystemConfiguration
 
 class Reachability{
+    /**
+     Check internet connection
+     - Returns: True if connection is available
+     */
     public static func connectedToNetwork() -> Bool {
         
         var zeroAddress = sockaddr_in()

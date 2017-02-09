@@ -28,10 +28,12 @@ enum jpLocationServiceError: Error {
 
 class jpLocationService: NSObject {
     
+    /// Singleton instance of jpLocationService
     static let instance = jpLocationService()
     
     private let locationManager = CLLocationManager()
 
+    /// Private constructor - CLLocationManager params
     private override init(){
         super.init();
         
@@ -39,15 +41,21 @@ class jpLocationService: NSObject {
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
     }
     
+    /// Start location tracking
     public func startUpdatingLocation (){
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
     }
     
+    /// Stop location tracking
     public func stopUpdatingLocation (){
         self.locationManager.stopUpdatingLocation()
     }
     
+    /**
+     Create Driver for CLLocationManager status (jpLocationServiceStatus struct).
+     - Returns: Driver
+     */
     public func getAuthorizationDriver() -> Driver<jpLocationServiceStatus> {
         return Observable.deferred { [weak locationManager] in
             let status = CLLocationManager.authorizationStatus()
@@ -72,6 +80,10 @@ class jpLocationService: NSObject {
 
     }
     
+    /**
+     Create Driver for CLLocation of device
+     - Returns: Driver
+     */
     public func getLocationDriver() -> Driver<CLLocation> {
         return locationManager.rx.didUpdateLocations
             .asDriver(onErrorJustReturn: [])
@@ -80,12 +92,26 @@ class jpLocationService: NSObject {
             }
     }
     
+    /**
+     Create Observable for city where device is
+     - Returns: Observable jpLocationServiceCityAndLocation
+     */
     public func getCityAndLocationObservable() -> Observable<jpLocationServiceCityAndLocation> {
         return self.getLocationDriver().asObservable().mapLocationToCityName();
     }
 }
 
 extension Observable where Element: CLLocation {
+    
+    /**
+     Change Observer from CLLocation to jpLocationServiceCityAndLocation.
+     
+     Simply check internet connection and get city name via CLGeocoder.
+     
+     Returns:
+     - onNext: jpLocationServiceCityAndLocation object
+     - onError: jpLocationServiceError object
+     */
     public func mapLocationToCityName() -> Observable<jpLocationServiceCityAndLocation> {
         return Observable<jpLocationServiceCityAndLocation>.create{ observer in
             let location = jpLocationService.instance.getLocationDriver();

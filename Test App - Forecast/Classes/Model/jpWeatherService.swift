@@ -11,14 +11,17 @@ import RxSwift
 import RxCocoa
 
 struct jpWeatherServiceToday {
+    /// Image of this weather condition
     var weatherImg: String
     var cityName: String
+    /// Tempreature and weather description
     var tempWeather: String
     var cloudness: String
     var humidity: String
     var pressure: String
     var windSpeed: String
     var windDirection: String
+    /// URL to map with given latitude and longitude
     var mapUrl: URL
 }
 
@@ -32,12 +35,20 @@ enum jpWeatherServiceError: Error {
 
 class jpWeatherService: NSObject {
     
+    /// Singleton instance of jpWeatherService
     static let instance = jpWeatherService()
     
+    /// Private constructor
     private override init(){
         super.init();
     }
     
+    /**
+     Transform degree value to localizated string of direction
+     - Parameter degree: Int value with degrees
+     - Returns: Localizated string of direction (N, NE, SW etc.)
+     - Throws: jpWeatherServiceError.badDataFormat if value is incorrect
+     */
     private func windDegreeToDirection(_ degree: Int) throws -> String{
         switch degree {
         case 0...22:
@@ -63,6 +74,11 @@ class jpWeatherService: NSObject {
         }
     }
     
+    /**
+     Transform image name at OpenWeatherMap to image in app
+     - Parameter sourceImageName: name of image at OWM
+     - Returns: Image name in app
+     */
     private func sourceImageNameToAppImageName(_ sourceImageName: String) -> String{
         switch sourceImageName {
         case "01d", "01n":
@@ -76,6 +92,13 @@ class jpWeatherService: NSObject {
         }
     }
     
+    /**
+     Gets data from OWM JSON and jpLocationServiceCityAndLocation object and create jpWeatherServiceToday object with correct values
+     - Parameter json: OWM JSON
+     - Parameter city: City name, longitude, latitude
+     - Returns: Info abyout weather (jpWeatherServiceToday)
+     - Throws: jpWeatherServiceError.badDataFormat if some value is incorrect or missing (check detail text)
+     */
     private func sourceJsonToServiceStruct(json: [String:Any], city: jpLocationServiceCityAndLocation) throws -> jpWeatherServiceToday {
         guard let clouds = json["clouds"] as? [String: Any] else {
             throw jpWeatherServiceError.badDataFormat(detail: "Missing 'clouds' folder")
@@ -108,6 +131,7 @@ class jpWeatherService: NSObject {
         guard let windSpeed = wind["speed"] as? Double else {
             throw jpWeatherServiceError.badDataFormat(detail: "Missing 'wind:speed' folder")
         }
+        
         guard let windDeg = wind["deg"] as? Int else {
             throw jpWeatherServiceError.badDataFormat(detail: "Missing 'wind:deg' folder")
         }
@@ -141,14 +165,35 @@ class jpWeatherService: NSObject {
         return jpWeatherServiceToday(weatherImg: weatherImg, cityName: cityName, tempWeather: weatherText, cloudness: cloudnessText, humidity: humidityText, pressure: pressureText, windSpeed: windSpeedText, windDirection: windDirectionText, mapUrl: mapUrl)
     }
     
+    /**
+     Gets URL to OWM API for JSON
+     - Parameter latitude: position latitude
+     - Parameter longitude: position longitude
+     - Returns: Correct URL
+     */
     private func getSourceDataUrl(latitude: Double, longitude: Double) -> URL{
         return URL(string: "http://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=18f1e34ef94fff88795abb0a8363619b&units=metric")!
     }
     
+    /**
+     Gets URL to OWM Weather map
+     - Parameter latitude: position latitude
+     - Parameter longitude: position longitude
+     - Returns: Correct URL
+     */
     private func getShareDataUrl(latitude: Double, longitude: Double) -> URL{
         return URL(string: "http://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=\(latitude)&lon=\(longitude)&zoom=8")!
     }
     
+    /**
+     Get Observer to jpWeatherServiceToday.
+     
+     Simply checking city name of position (via jpLocationService.getCityAndLocationObservable) and if value is changed check current weather on OWM for this location.
+     
+     Returns:
+     - onNext: jpWeatherServiceToday object
+     - onError: jpWeatherServiceError object
+     */
     public func getTodayForecastObservable() -> Observable<jpWeatherServiceToday> {
         return Observable.create{ observer in
             let location = jpLocationService.instance.getCityAndLocationObservable();
