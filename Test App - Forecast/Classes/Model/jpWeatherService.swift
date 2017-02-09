@@ -25,6 +25,22 @@ struct jpWeatherServiceToday {
     var mapUrl: URL
 }
 
+extension jpWeatherServiceToday: Equatable {
+    /// Comparation of two jpWeatherServiceToday struct
+    static func ==(lhs: jpWeatherServiceToday, rhs: jpWeatherServiceToday) -> Bool {
+        let areEqual = lhs.weatherImg == rhs.weatherImg &&
+            lhs.cityName == rhs.cityName &&
+            lhs.tempWeather == rhs.tempWeather &&
+            lhs.cloudness == rhs.cloudness &&
+            lhs.humidity == rhs.humidity &&
+            lhs.pressure == rhs.pressure &&
+            lhs.windSpeed == rhs.windSpeed &&
+            lhs.windDirection == rhs.windDirection &&
+            lhs.mapUrl == rhs.mapUrl
+        return areEqual
+    }
+}
+
 enum jpWeatherServiceError: Error {
     case noNetworkConnection
     case urlRequestProblem
@@ -49,7 +65,7 @@ class jpWeatherService: NSObject {
      - Returns: Localizated string of direction (N, NE, SW etc.)
      - Throws: jpWeatherServiceError.badDataFormat if value is incorrect
      */
-    private func windDegreeToDirection(_ degree: Int) throws -> String{
+    internal func windDegreeToDirection(_ degree: Int) throws -> String{
         switch degree {
         case 0...22:
             return NSLocalizedString("WIND_DIRECTION_N", comment: "North");
@@ -79,7 +95,7 @@ class jpWeatherService: NSObject {
      - Parameter sourceImageName: name of image at OWM
      - Returns: Image name in app
      */
-    private func sourceImageNameToAppImageName(_ sourceImageName: String) -> String{
+    internal func sourceImageNameToAppImageName(_ sourceImageName: String) -> String{
         switch sourceImageName {
         case "01d", "01n":
             return "TodayWeatherIconImageViewSunny"
@@ -99,7 +115,7 @@ class jpWeatherService: NSObject {
      - Returns: Info abyout weather (jpWeatherServiceToday)
      - Throws: jpWeatherServiceError.badDataFormat if some value is incorrect or missing (check detail text)
      */
-    private func sourceJsonToServiceStruct(json: [String:Any], city: jpLocationServiceCityAndLocation) throws -> jpWeatherServiceToday {
+    internal func sourceJsonToServiceStruct(json: [String:Any], city: jpLocationServiceCityAndLocation) throws -> jpWeatherServiceToday {
         guard let clouds = json["clouds"] as? [String: Any] else {
             throw jpWeatherServiceError.badDataFormat(detail: "Missing 'clouds' folder")
         }
@@ -193,8 +209,10 @@ class jpWeatherService: NSObject {
      Returns:
      - onNext: jpWeatherServiceToday object
      - onError: jpWeatherServiceError object
+     
+     - Parameter cityTest: only different city values
      */
-    public func getTodayForecastObservable() -> Observable<jpWeatherServiceToday> {
+    public func getTodayForecastObservable(cityTest: Bool) -> Observable<jpWeatherServiceToday> {
         return Observable.create{ observer in
             let location = jpLocationService.instance.getCityAndLocationObservable();
             var task: URLSessionDataTask?;
@@ -209,7 +227,7 @@ class jpWeatherService: NSObject {
                     static var cityName:String? = nil
                 }
                 
-                if(n.name != CityHolder.cityName){
+                if(!cityTest || n.name != CityHolder.cityName){
                     CityHolder.cityName = n.name
                     
                     let url = self.getSourceDataUrl(latitude: n.latitude, longitude: n.longitude)

@@ -31,13 +31,13 @@ class jpLocationService: NSObject {
     /// Singleton instance of jpLocationService
     static let instance = jpLocationService()
     
-    private let locationManager = CLLocationManager()
+    internal let locationManager = CLLocationManager()
 
     /// Private constructor - CLLocationManager params
     private override init(){
         super.init();
         
-        self.locationManager.distanceFilter = 10.0
+        self.locationManager.distanceFilter = 100.0
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
     }
     

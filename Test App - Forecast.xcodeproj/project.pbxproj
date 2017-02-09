@@ -13,7 +13,7 @@
 		3B4568191E267A5000A5ADE8 /* Test_App___Forecast.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B4568171E267A5000A5ADE8 /* Test_App___Forecast.xcdatamodeld */; };
 		3B45681B1E267A5000A5ADE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B45681A1E267A5000A5ADE8 /* Assets.xcassets */; };
 		3B45681E1E267A5000A5ADE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B45681C1E267A5000A5ADE8 /* LaunchScreen.storyboard */; };
-		3B4568291E267A5000A5ADE8 /* Test_App___ForecastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4568281E267A5000A5ADE8 /* Test_App___ForecastTests.swift */; };
+		3B4BCAA91E4C79E9000762AA /* TodayTests_ForecastApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BCAA81E4C79E9000762AA /* TodayTests_ForecastApp.swift */; };
 		3B973FA21E2CC43B00A391A1 /* jpLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B973FA11E2CC43B00A391A1 /* jpLocationService.swift */; };
 		3BB9DDC11E4497D5003B8C89 /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB9DDC01E4497D5003B8C89 /* CLLocationManager+Rx.swift */; };
 		3BB9DDC31E44980F003B8C89 /* RxCLLocationManagerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB9DDC21E44980F003B8C89 /* RxCLLocationManagerDelegateProxy.swift */; };
@@ -51,8 +51,8 @@
 		3B45681D1E267A5000A5ADE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B45681F1E267A5000A5ADE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B4568241E267A5000A5ADE8 /* Test App - ForecastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Test App - ForecastTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B4568281E267A5000A5ADE8 /* Test_App___ForecastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Test_App___ForecastTests.swift"; sourceTree = "<group>"; };
 		3B45682A1E267A5000A5ADE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3B4BCAA81E4C79E9000762AA /* TodayTests_ForecastApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayTests_ForecastApp.swift; sourceTree = "<group>"; };
 		3B973FA11E2CC43B00A391A1 /* jpLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpLocationService.swift; sourceTree = "<group>"; };
 		3BB9DDC01E4497D5003B8C89 /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
 		3BB9DDC21E44980F003B8C89 /* RxCLLocationManagerDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCLLocationManagerDelegateProxy.swift; sourceTree = "<group>"; };
@@ -140,8 +140,8 @@
 		3B4568271E267A5000A5ADE8 /* Test App - ForecastTests */ = {
 			isa = PBXGroup;
 			children = (
-				3B4568281E267A5000A5ADE8 /* Test_App___ForecastTests.swift */,
 				3B45682A1E267A5000A5ADE8 /* Info.plist */,
+				3B4BCAA81E4C79E9000762AA /* TodayTests_ForecastApp.swift */,
 			);
 			path = "Test App - ForecastTests";
 			sourceTree = "<group>";
@@ -469,7 +469,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B4568291E267A5000A5ADE8 /* Test_App___ForecastTests.swift in Sources */,
+				3B4BCAA91E4C79E9000762AA /* TodayTests_ForecastApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

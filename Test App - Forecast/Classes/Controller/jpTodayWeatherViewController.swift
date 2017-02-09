@@ -43,7 +43,7 @@ class jpTodayWeatherViewController: UIViewController {
         }).addDisposableTo(disposeBag)
         
         let weatherService = jpWeatherService.instance
-        weatherService.getTodayForecastObservable().observeOn(MainScheduler.instance).subscribe(onNext:{n in
+        weatherService.getTodayForecastObservable(cityTest: true).observeOn(MainScheduler.instance).subscribe(onNext:{n in
             self.imageViewWeather.image = UIImage(named: n.weatherImg)
             self.labelPosition.text = n.cityName
             self.labelWeather.text = n.tempWeather

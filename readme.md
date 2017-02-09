@@ -26,5 +26,3 @@ Serious problems (ignored - this app is for me only for education of Swift and R
 ####Posible improvements
 - Landscape mode of app.
 - Forecast section.
-- Tests.
-
