@@ -44,8 +44,13 @@ class jpTodayWeatherViewController: UIViewController {
         
         let weatherService = jpWeatherService.instance
         weatherService.getTodayForecastObservable(cityTest: true).observeOn(MainScheduler.instance).subscribe(onNext:{n in
+            let attachment:NSTextAttachment = NSTextAttachment()
+            attachment.image = UIImage(named: "TodayLocationLabelImage");
+            let attachmentString: NSAttributedString = NSAttributedString(attachment: attachment)
+            let labelPositionString: NSMutableAttributedString = NSMutableAttributedString(string: " \(n.cityName)")
+            labelPositionString.insert(attachmentString, at: 0)
+            self.labelPosition.attributedText = labelPositionString
             self.imageViewWeather.image = UIImage(named: n.weatherImg)
-            self.labelPosition.text = n.cityName
             self.labelWeather.text = n.tempWeather
             self.labelCloudness.text = n.cloudness
             self.labelHumidity.text = n.humidity
