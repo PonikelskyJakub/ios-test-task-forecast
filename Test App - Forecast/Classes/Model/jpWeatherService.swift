@@ -10,6 +10,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+struct jpWeatherServiceForecast {
+    /// Image of this weather condition
+    var weatherImg: String
+    var dayOfWeek: String
+    var weatherDesc: String
+    var tempreature: String
+}
+
 struct jpWeatherServiceToday {
     /// Image of this weather condition
     var weatherImg: String

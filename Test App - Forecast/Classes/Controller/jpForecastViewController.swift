@@ -1,0 +1,60 @@
+//
+//  jpForecastViewController.swift
+//  Test App - Forecast
+//
+//  Created by Jakub on 10.02.17.
+//  Copyright © 2017 Ponikelský Jakub. All rights reserved.
+//
+
+import RxSwift
+import RxCocoa
+import UIKit
+
+class jpForecastViewController: UIViewController {
+
+    @IBOutlet weak var forecastTableView: UITableView!
+    
+    /// Variable with tableView data
+    fileprivate var forecastData: Variable<Array<jpWeatherServiceForecast>> = Variable(Array())
+    /// Dispose bag for deallocating of observers.
+    private let disposeBag = DisposeBag()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.forecastData.asObservable().subscribe(onNext: { n in
+            self.forecastTableView.reloadData()
+        }).addDisposableTo(self.disposeBag)
+        
+        let locationService = jpLocationService.instance
+        locationService.getCityAndLocationObservable().subscribe(onNext: { n in
+            self.forecastData.value.append(jpWeatherServiceForecast(weatherImg: "ForecastWeatherIconImageViewCloudy", dayOfWeek: "Monday1", weatherDesc: "Cloudy", tempreature: "5°C"))
+            self.forecastData.value.append(jpWeatherServiceForecast(weatherImg: "ForecastWeatherIconImageViewCloudy", dayOfWeek: "Monday2", weatherDesc: "Cloudy", tempreature: "5°C"))
+            self.forecastData.value.append(jpWeatherServiceForecast(weatherImg: "ForecastWeatherIconImageViewCloudy", dayOfWeek: "Monday3", weatherDesc: "Cloudy", tempreature: "5°C"))
+        }).addDisposableTo(self.disposeBag)
+        
+    }
+}
+
+// MARK: - Table View Data Source
+
+extension jpForecastViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.forecastData.value.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "jpForecastTableViewCell") as! jpForecastTableViewCell
+        cell.fillTableViewCell(object: self.forecastData.value[indexPath.row])
+        return cell
+    }
+}
+
+// MARK: - Table View Delegate
+
+extension jpForecastViewController: UITableViewDelegate {
+    
+}
+
+
+
