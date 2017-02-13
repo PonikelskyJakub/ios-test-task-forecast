@@ -9,6 +9,7 @@
 import RxSwift
 import RxCocoa
 import RxBlocking
+import RxTest
 import XCTest
 import CoreLocation
 
@@ -25,25 +26,7 @@ class TodayTests_ForecastApp: XCTestCase {
         super.tearDown()
     }
     
-    func testLocationDriver() {
-        var location: CLLocation?
-        let targetLocation = CLLocation(latitude: 51.51, longitude: -0.13)
-        
-        autoreleasepool {
-            do{
-                jpLocationService.instance.locationManager.delegate!.locationManager!(jpLocationService.instance.locationManager, didUpdateLocations: [targetLocation])
-
-                location = try jpLocationService.instance.getLocationDriver().toBlocking().first()
-            }
-            catch let error{
-                XCTFail("\(error)")
-            }
-        }
-        
-        XCTAssertEqual(location?.coordinate.latitude, targetLocation.coordinate.latitude)
-        XCTAssertEqual(location?.coordinate.longitude, targetLocation.coordinate.longitude)
-    }
-
+    /// Checking jpWeatherService.sourceImageNameToAppImageName function
     func testImageResolving(){
         XCTAssertEqual("TodayWeatherIconImageViewSunny", jpWeatherService.instance.sourceImageNameToAppImageName("01d"))
         
@@ -56,6 +39,7 @@ class TodayTests_ForecastApp: XCTestCase {
         XCTAssertEqual("TodayWeatherIconImageViewCloudy", jpWeatherService.instance.sourceImageNameToAppImageName("13d"))
     }
     
+    /// Checking jpWeatherService.windDegreeToDirection function
     func testDegreeToDirectionString() {
         XCTAssertThrowsError(try jpWeatherService.instance.windDegreeToDirection(361))
         
@@ -106,6 +90,7 @@ class TodayTests_ForecastApp: XCTestCase {
         }
     }
     
+    /// Checking jpWeatherService.sourceJsonToServiceStruct function
     func testJsonSplit(){
         let jsonString:String = "{\"coord\":{\"lon\":-122.03,\"lat\":37.32},\"weather\":[{\"id\":804,\"main\":\"Clouds\",\"description\":\"overcast clouds\",\"icon\":\"04n\"}],\"base\":\"stations\",\"main\":{\"temp\":16.37,\"pressure\":1017,\"humidity\":72,\"temp_min\":15,\"temp_max\":18},\"visibility\":16093,\"wind\":{\"speed\":5.1,\"deg\":210},\"clouds\":{\"all\":90},\"dt\":1486632900,\"sys\":{\"type\":1,\"id\":471,\"message\":0.0925,\"country\":\"US\",\"sunrise\":1486652574,\"sunset\":1486690936},\"id\":5341145,\"name\":\"Cupertino\",\"cod\":200}"
         
@@ -123,5 +108,34 @@ class TodayTests_ForecastApp: XCTestCase {
         catch let error{
             XCTFail("\(error)")
         }
+    }
+    
+    /// Checking jpWeatherService.getShareDataUrl function
+    func testGettingShareUrl(){
+        let cityData = jpLocationServiceCityAndLocation(name: "Sunnyvale, United States", latitude: 37.337627159999997, longitude: -122.03976311)
+        
+        XCTAssert(URL(string: "http://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=\(cityData.latitude)&lon=\(cityData.longitude)&zoom=8") == jpWeatherService.instance.getShareDataUrl(latitude: cityData.latitude, longitude: cityData.longitude))
+    }
+    
+    /**
+     Checking jpWeatherService.getTodayForecastObservable function and values from observable
+     
+     Needs internet connection
+     */
+    func testGettingDataAboutWeather(){
+        var weather: jpWeatherServiceToday?
+        let cityData = jpLocationServiceCityAndLocation(name: "Sunnyvale, United States", latitude: 37.337627159999997, longitude: -122.03976311)
+        
+        autoreleasepool {
+            do{
+                weather = try jpWeatherService.instance.getTodayForecastObservable(cityData: cityData).toBlocking().first()
+            }
+            catch let error{
+                XCTFail("\(error)")
+            }
+        }
+        
+        XCTAssertEqual(cityData.name, weather?.cityName)
+        XCTAssertEqual(jpWeatherService.instance.getShareDataUrl(latitude: cityData.latitude, longitude: cityData.longitude), weather?.mapUrl)
     }
 }

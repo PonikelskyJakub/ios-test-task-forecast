@@ -16,9 +16,13 @@ class jpForecastViewController: UIViewController {
     
     /// Variable with tableView data
     fileprivate var forecastData: Variable<Array<jpWeatherServiceForecast>> = Variable(Array())
+    
     /// Dispose bag for deallocating of observers.
     private let disposeBag = DisposeBag()
 
+    /**
+     Init VC, create observer for data visible in tableview, fill table view with test data
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,22 +31,27 @@ class jpForecastViewController: UIViewController {
         }).addDisposableTo(self.disposeBag)
         
         let locationService = jpLocationService.instance
-        locationService.getCityAndLocationObservable().subscribe(onNext: { n in
+        locationService.actualCityData.asObservable().subscribe(onNext: { n in
             self.forecastData.value.append(jpWeatherServiceForecast(weatherImg: "ForecastWeatherIconImageViewCloudy", dayOfWeek: "Monday1", weatherDesc: "Cloudy", tempreature: "5°C"))
             self.forecastData.value.append(jpWeatherServiceForecast(weatherImg: "ForecastWeatherIconImageViewCloudy", dayOfWeek: "Monday2", weatherDesc: "Cloudy", tempreature: "5°C"))
             self.forecastData.value.append(jpWeatherServiceForecast(weatherImg: "ForecastWeatherIconImageViewCloudy", dayOfWeek: "Monday3", weatherDesc: "Cloudy", tempreature: "5°C"))
         }).addDisposableTo(self.disposeBag)
-        
     }
 }
 
 // MARK: - Table View Data Source
 
 extension jpForecastViewController: UITableViewDataSource {
+    /**
+     Returns count of data objects
+     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.forecastData.value.count
     }
     
+    /**
+     Return filled cell
+     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "jpForecastTableViewCell") as! jpForecastTableViewCell
         cell.fillTableViewCell(object: self.forecastData.value[indexPath.row])

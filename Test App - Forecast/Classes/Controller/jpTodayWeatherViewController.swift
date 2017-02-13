@@ -23,67 +23,57 @@ class jpTodayWeatherViewController: UIViewController {
     
     /// Share button URL.
     private var outputUrl: URL = URL(string:"http://openweathermap.org/weathermap")!
+    
     /// Share button text.
     private var outputText: String = NSLocalizedString("SHARE_DEFAULT_MESSAGE", comment: "Default share msg")
+
     /// Dispose bag for deallocating of observers.
     private let disposeBag = DisposeBag()
 
     /** 
-     Constructor - init VC, set title and create two observers to values of weather and location authorization
+     Constructor - init VC, set title and create observer for city change and actualise weather info, when city change and city data are available
      */
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.title = NSLocalizedString("TODAY_VIEW_CONTROLLER_TITLE", comment: "Today VC title");
         
-        let locationService = jpLocationService.instance
-        locationService.getAuthorizationDriver().drive(onNext:{n in
-            if(n == jpLocationServiceStatus.disallow){
-                self.showAlert(title: NSLocalizedString("WARNING_POPUPS_LOCALIZATION_DISABLED_TITLE", comment: "Error title"), text: NSLocalizedString("WARNING_POPUPS_LOCALIZATION_DISABLED_TEXT", comment: "Error text"))
-            }
-        }).addDisposableTo(disposeBag)
-        
         let weatherService = jpWeatherService.instance
-        weatherService.getTodayForecastObservable(cityTest: true).observeOn(MainScheduler.instance).subscribe(onNext:{n in
-            let attachment:NSTextAttachment = NSTextAttachment()
-            attachment.image = UIImage(named: "TodayLocationLabelImage");
-            let attachmentString: NSAttributedString = NSAttributedString(attachment: attachment)
-            let labelPositionString: NSMutableAttributedString = NSMutableAttributedString(string: " \(n.cityName)")
-            labelPositionString.insert(attachmentString, at: 0)
-            self.labelPosition.attributedText = labelPositionString
-            self.imageViewWeather.image = UIImage(named: n.weatherImg)
-            self.labelWeather.text = n.tempWeather
-            self.labelCloudness.text = n.cloudness
-            self.labelHumidity.text = n.humidity
-            self.labelPressure.text = n.pressure
-            self.labelWindSpeed.text = n.windSpeed
-            self.labelWindDirection.text = n.windDirection
-            self.outputUrl = n.mapUrl
-            self.outputText = String(format: "%@: %@ - %@", NSLocalizedString("SHARE_MESSAGE_PREFIX", comment: "Share msg prefix"), n.cityName, n.tempWeather)
-        },onError:{n in
-            if let err = n as? jpWeatherServiceError {
-                switch err {
-                    case .noNetworkConnection:
-                        self.showAlert(title: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TITLE", comment: "Error title"), text: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_NETWORK_TEXT", comment: "Error text"))
-                        return
-                    default:
-                        break;
-                }
+        let locationService = jpLocationService.instance
+        
+        locationService.actualCityData.asObservable().subscribe(onNext: { n in
+            if let data = n {
+                weatherService.getTodayForecastObservable(cityData: data).observeOn(MainScheduler.instance).subscribe(onNext:{n in
+                    let attachment:NSTextAttachment = NSTextAttachment()
+                    attachment.image = UIImage(named: "TodayLocationLabelImage");
+                    let attachmentString: NSAttributedString = NSAttributedString(attachment: attachment)
+                    let labelPositionString: NSMutableAttributedString = NSMutableAttributedString(string: " \(n.cityName)")
+                    labelPositionString.insert(attachmentString, at: 0)
+                    self.labelPosition.attributedText = labelPositionString
+                    self.imageViewWeather.image = UIImage(named: n.weatherImg)
+                    self.labelWeather.text = n.tempWeather
+                    self.labelCloudness.text = n.cloudness
+                    self.labelHumidity.text = n.humidity
+                    self.labelPressure.text = n.pressure
+                    self.labelWindSpeed.text = n.windSpeed
+                    self.labelWindDirection.text = n.windDirection
+                    self.outputUrl = n.mapUrl
+                    self.outputText = String(format: "%@: %@ - %@", NSLocalizedString("SHARE_MESSAGE_PREFIX", comment: "Share msg prefix"), n.cityName, n.tempWeather)
+                },onError:{n in
+                    if let err = n as? jpWeatherServiceError {
+                        switch err {
+                        case .noNetworkConnection:
+                            Utilities.showAlert(viewController: self, title: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TITLE", comment: "Error title"), text: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_NETWORK_TEXT", comment: "Error text"))
+                            return
+                        default:
+                            break;
+                        }
+                    }
+                    
+                    Utilities.showAlert(viewController: self, title: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TITLE", comment: "Error title"), text: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TEXT", comment: "Error text"))
+                }, onCompleted: {
+                }).addDisposableTo(self.disposeBag)
             }
-
-            self.showAlert(title: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TITLE", comment: "Error title"), text: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TEXT", comment: "Error text"))
-        }).addDisposableTo(disposeBag)
-    }
-    
-    /**
-     Show alert popup
-     
-     - Parameter title: Title of popup.
-     - Parameter text: Text in popup.
-     */
-    private func showAlert(title: String, text: String) -> Void{
-        let alert = UIAlertController(title: title, message: text, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("WARNING_POPUPS_DISMISS_BUTTON", comment: "OK"), style: UIAlertActionStyle.destructive, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        }).addDisposableTo(self.disposeBag)
     }
     
     /// Share actual text and URL via UIActivityViewController

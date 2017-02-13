@@ -35,7 +35,7 @@ struct jpWeatherServiceToday {
 
 extension jpWeatherServiceToday: Equatable {
     /// Comparation of two jpWeatherServiceToday struct
-    static func ==(lhs: jpWeatherServiceToday, rhs: jpWeatherServiceToday) -> Bool {
+    public static func ==(lhs: jpWeatherServiceToday, rhs: jpWeatherServiceToday) -> Bool {
         let areEqual = lhs.weatherImg == rhs.weatherImg &&
             lhs.cityName == rhs.cityName &&
             lhs.tempWeather == rhs.tempWeather &&
@@ -205,79 +205,49 @@ class jpWeatherService: NSObject {
      - Parameter longitude: position longitude
      - Returns: Correct URL
      */
-    private func getShareDataUrl(latitude: Double, longitude: Double) -> URL{
+    internal func getShareDataUrl(latitude: Double, longitude: Double) -> URL{
         return URL(string: "http://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=\(latitude)&lon=\(longitude)&zoom=8")!
     }
     
     /**
-     Get Observer to jpWeatherServiceToday.
-     
-     Simply checking city name of position (via jpLocationService.getCityAndLocationObservable) and if value is changed check current weather on OWM for this location.
+     Returns observable for checking weather for city from parameter cityData
      
      Returns:
      - onNext: jpWeatherServiceToday object
      - onError: jpWeatherServiceError object
      
-     - Parameter cityTest: only different city values
+     - Parameter cityData: data about city
      */
-    public func getTodayForecastObservable(cityTest: Bool) -> Observable<jpWeatherServiceToday> {
+    public func getTodayForecastObservable(cityData: jpLocationServiceCityAndLocation) -> Observable<jpWeatherServiceToday> {
         return Observable.create{ observer in
-            let location = jpLocationService.instance.getCityAndLocationObservable();
-            var task: URLSessionDataTask?;
-            
-            let disposableWeather = location.subscribe(onNext: { n in
-                guard Reachability.connectedToNetwork() else {
-                    observer.on(.error(jpWeatherServiceError.noNetworkConnection))
+            let url = self.getSourceDataUrl(latitude: cityData.latitude, longitude: cityData.longitude)
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                guard error == nil else {
+                    observer.on(.error(jpWeatherServiceError.urlRequestProblem))
                     return
                 }
                 
-                struct CityHolder {
-                    static var cityName:String? = nil
+                guard let data = data else {
+                    observer.on(.error(jpWeatherServiceError.badDataFormat(detail: "Data is nil")))
+                    return
                 }
                 
-                if(!cityTest || n.name != CityHolder.cityName){
-                    CityHolder.cityName = n.name
-                    
-                    let url = self.getSourceDataUrl(latitude: n.latitude, longitude: n.longitude)
-                    
-                    task = URLSession.shared.dataTask(with: url) { data, response, error in
-                        guard error == nil else {
-                            observer.on(.error(jpWeatherServiceError.urlRequestProblem))
-                            return
-                        }
-
-                        guard let data = data else {
-                            observer.on(.error(jpWeatherServiceError.badDataFormat(detail: "Data is nil")))
-                            return
-                        }
-                        
-                        do {
-                            let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
-                            observer.on(.next(try self.sourceJsonToServiceStruct(json: json, city: n)))
-                            //observer.on(.completed)
-                        } catch let errorBDF as jpWeatherServiceError {
-                            observer.on(.error(errorBDF))
-                            return
-                        } catch {
-                            observer.on(.error(jpWeatherServiceError.badDataFormat(detail: "Other problem")))
-                            return
-                        }
-                    }
-                    task?.resume()
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
+                    observer.on(.next(try self.sourceJsonToServiceStruct(json: json, city: cityData)))
+                    observer.on(.completed)
+                } catch let errorBDF as jpWeatherServiceError {
+                    observer.on(.error(errorBDF))
+                    return
+                } catch {
+                    observer.on(.error(jpWeatherServiceError.badDataFormat(detail: "Other problem")))
+                    return
                 }
-            }, onError:{n in
-                if let err = n as? jpLocationServiceError {
-                    if(err == jpLocationServiceError.noNetworkConnection){
-                        observer.on(.error(jpWeatherServiceError.noNetworkConnection))
-                        return
-                    }
-                }
-                observer.on(.error(jpWeatherServiceError.localizationProblem))
-            })
+            }
+            task.resume()
             
             return Disposables.create {
-                task?.cancel()
-                disposableWeather.dispose()
+                task.cancel()
             }
         }
     }

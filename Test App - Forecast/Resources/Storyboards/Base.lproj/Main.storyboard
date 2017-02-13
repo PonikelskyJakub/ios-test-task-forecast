@@ -66,26 +66,26 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D68-1z-W26">
-                                                    <rect key="frame" x="18" y="10" width="60" height="60"/>
+                                                    <rect key="frame" x="18" y="12.5" width="55" height="55"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="60" id="Qdx-SF-YHz"/>
-                                                        <constraint firstAttribute="width" constant="60" id="RMS-ee-mQP"/>
+                                                        <constraint firstAttribute="height" constant="55" id="Qdx-SF-YHz"/>
+                                                        <constraint firstAttribute="width" constant="55" id="RMS-ee-mQP"/>
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PNu-Em-1aT" userLabel="View - text content">
-                                                    <rect key="frame" x="88" y="0.0" width="279" height="80"/>
+                                                    <rect key="frame" x="83" y="0.0" width="284" height="80"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p7E-9B-mtz" userLabel="View - container day and desc">
-                                                            <rect key="frame" x="10" y="19" width="124.5" height="43"/>
+                                                            <rect key="frame" x="10" y="19" width="127" height="43"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olz-bC-y44">
-                                                                    <rect key="frame" x="0.0" y="5" width="124.5" height="15"/>
+                                                                    <rect key="frame" x="0.0" y="5" width="127" height="15"/>
                                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvo-Li-oBi">
-                                                                    <rect key="frame" x="0.0" y="25" width="124.5" height="13"/>
+                                                                    <rect key="frame" x="0.0" y="25" width="127" height="13"/>
                                                                     <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
@@ -103,13 +103,13 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temp" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iFR-e7-U2Y">
-                                                            <rect key="frame" x="144.5" y="0.0" width="124.5" height="80"/>
+                                                            <rect key="frame" x="147" y="0.0" width="127" height="80"/>
                                                             <fontDescription key="fontDescription" name="ProximaNova-Light" family="Proxima Nova" pointSize="40"/>
                                                             <color key="textColor" red="0.0" green="0.40000000000000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rAv-qs-vwx" userLabel="View - separator">
-                                                            <rect key="frame" x="0.0" y="78" width="279" height="2"/>
+                                                            <rect key="frame" x="0.0" y="78" width="284" height="2"/>
                                                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="2" id="YB9-Xs-v4t"/>

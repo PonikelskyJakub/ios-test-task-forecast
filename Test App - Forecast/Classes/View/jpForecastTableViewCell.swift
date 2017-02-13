@@ -14,6 +14,9 @@ class jpForecastTableViewCell: UITableViewCell {
     @IBOutlet weak var weatherDescriptionLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     
+    /**
+     Fill all labels and images in cell
+     */
     public func fillTableViewCell(object: jpWeatherServiceForecast){
         self.weatherImageView.image = UIImage(named: object.weatherImg)
         self.dayOfWeekLabel.text = object.dayOfWeek

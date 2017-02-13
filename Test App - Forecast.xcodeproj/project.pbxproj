@@ -29,6 +29,7 @@
 		3BEA14271E4B1B8400814E1F /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEA14261E4B1B8400814E1F /* Reachability.swift */; };
 		3BEB72F51E4DBBB60038D076 /* jpForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB72F41E4DBBB60038D076 /* jpForecastViewController.swift */; };
 		3BEB72F71E4DEA3F0038D076 /* jpForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB72F61E4DEA3F0038D076 /* jpForecastTableViewCell.swift */; };
+		3BEB72F91E4DFEA20038D076 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB72F81E4DFEA20038D076 /* Utilities.swift */; };
 		3E432A0DB280391D4A27BEFE /* Pods_Test_App___ForecastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEF359E79E7F3E8936B5B46 /* Pods_Test_App___ForecastTests.framework */; };
 		8BD8791C0047D3BC1A48212E /* Pods_Test_App___Forecast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6762AE06317C566448CC6760 /* Pods_Test_App___Forecast.framework */; };
 /* End PBXBuildFile section */
@@ -70,6 +71,7 @@
 		3BEA14261E4B1B8400814E1F /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3BEB72F41E4DBBB60038D076 /* jpForecastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpForecastViewController.swift; sourceTree = "<group>"; };
 		3BEB72F61E4DEA3F0038D076 /* jpForecastTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpForecastTableViewCell.swift; sourceTree = "<group>"; };
+		3BEB72F81E4DFEA20038D076 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		59F0222BEBBFBD5E8C6AD313 /* Pods-Test App - ForecastTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test App - ForecastTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Test App - ForecastTests/Pods-Test App - ForecastTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6762AE06317C566448CC6760 /* Pods_Test_App___Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_Test_App___Forecast.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AEF359E79E7F3E8936B5B46 /* Pods_Test_App___ForecastTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_Test_App___ForecastTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +159,7 @@
 				3BB9DDC21E44980F003B8C89 /* RxCLLocationManagerDelegateProxy.swift */,
 				3BC567EB1E487E8C008F6FE1 /* UIImageExtension.swift */,
 				3BEA14261E4B1B8400814E1F /* Reachability.swift */,
+				3BEB72F81E4DFEA20038D076 /* Utilities.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				3B4568111E267A5000A5ADE8 /* AppDelegate.swift in Sources */,
 				3BB9DDC11E4497D5003B8C89 /* CLLocationManager+Rx.swift in Sources */,
 				3BC567EC1E487E8C008F6FE1 /* UIImageExtension.swift in Sources */,
+				3BEB72F91E4DFEA20038D076 /* Utilities.swift in Sources */,
 				3B973FA21E2CC43B00A391A1 /* jpLocationService.swift in Sources */,
 				3BC567EE1E4881AE008F6FE1 /* jpForecastNavigationController.swift in Sources */,
 				3BB9DDC31E44980F003B8C89 /* RxCLLocationManagerDelegateProxy.swift in Sources */,
