@@ -76,6 +76,12 @@ class jpTodayWeatherViewController: UIViewController {
         }).addDisposableTo(self.disposeBag)
     }
     
+    /// Changes title of screen when VC is active
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tabBarController?.title = NSLocalizedString("TODAY_VIEW_CONTROLLER_TITLE", comment: "Today VC title");
+    }
+    
     /// Share actual text and URL via UIActivityViewController
     @IBAction func shareButtonTouchUp(_ sender: UIButton) {
         let activityViewController = UIActivityViewController(activityItems: [self.outputText, self.outputUrl], applicationActivities: nil)

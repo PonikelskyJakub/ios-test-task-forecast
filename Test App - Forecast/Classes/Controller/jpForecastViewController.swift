@@ -21,21 +21,30 @@ class jpForecastViewController: UIViewController {
     private let disposeBag = DisposeBag()
 
     /**
-     Init VC, create observer for data visible in tableview, fill table view with test data
+     Init VC, create observer for data visible in tableview, fill table view with test data, change title
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.forecastData.asObservable().subscribe(onNext: { n in
             self.forecastTableView.reloadData()
         }).addDisposableTo(self.disposeBag)
         
         let locationService = jpLocationService.instance
         locationService.actualCityData.asObservable().subscribe(onNext: { n in
+            self.tabBarController?.title = locationService.actualCityData.value?.name;
+
             self.forecastData.value.append(jpWeatherServiceForecast(weatherImg: "ForecastWeatherIconImageViewCloudy", dayOfWeek: "Monday1", weatherDesc: "Cloudy", tempreature: "5°C"))
             self.forecastData.value.append(jpWeatherServiceForecast(weatherImg: "ForecastWeatherIconImageViewCloudy", dayOfWeek: "Monday2", weatherDesc: "Cloudy", tempreature: "5°C"))
             self.forecastData.value.append(jpWeatherServiceForecast(weatherImg: "ForecastWeatherIconImageViewCloudy", dayOfWeek: "Monday3", weatherDesc: "Cloudy", tempreature: "5°C"))
         }).addDisposableTo(self.disposeBag)
+    }
+    
+    /// Changes title of screen when VC is active
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let locationService = jpLocationService.instance
+        self.tabBarController?.title = locationService.actualCityData.value?.name;
     }
 }
 
@@ -62,7 +71,11 @@ extension jpForecastViewController: UITableViewDataSource {
 // MARK: - Table View Delegate
 
 extension jpForecastViewController: UITableViewDelegate {
-    
+    /**
+     Nothing - unselectable cells
+     */
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    }
 }
 
 
