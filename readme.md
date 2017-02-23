@@ -51,8 +51,8 @@ All graphic elements and assets are located in "Description" folder as this docu
 - Useless using of Core Data (education reason)
 
 ##Posible improvements
-- Title of Forecast section from Core Data
-- Struct weather today in separate file, stop task getting data before new one.
+- Title of Forecast section from Core Data.
+- Stop task getting data before new one.
 - Change position of files in Model, View, Controller.
 - Move some function to libs or make them static.
 - Extract OWM ID from code to file.

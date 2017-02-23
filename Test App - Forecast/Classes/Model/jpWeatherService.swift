@@ -11,37 +11,6 @@ import RxSwift
 import RxCocoa
 import CoreData
 
-struct jpWeatherServiceToday {
-    /// Image of this weather condition
-    var weatherImg: String
-    var cityName: String
-    /// Tempreature and weather description
-    var tempWeather: String
-    var cloudness: String
-    var humidity: String
-    var pressure: String
-    var windSpeed: String
-    var windDirection: String
-    /// URL to map with given latitude and longitude
-    var mapUrl: URL
-}
-
-extension jpWeatherServiceToday: Equatable {
-    /// Comparation of two jpWeatherServiceToday struct
-    public static func == (lhs: jpWeatherServiceToday, rhs: jpWeatherServiceToday) -> Bool {
-        let areEqual = lhs.weatherImg == rhs.weatherImg &&
-            lhs.cityName == rhs.cityName &&
-            lhs.tempWeather == rhs.tempWeather &&
-            lhs.cloudness == rhs.cloudness &&
-            lhs.humidity == rhs.humidity &&
-            lhs.pressure == rhs.pressure &&
-            lhs.windSpeed == rhs.windSpeed &&
-            lhs.windDirection == rhs.windDirection &&
-            lhs.mapUrl == rhs.mapUrl
-        return areEqual
-    }
-}
-
 enum jpWeatherServiceError: Error {
     case noNetworkConnection
     case urlRequestProblem
@@ -118,10 +87,10 @@ class jpWeatherService: NSObject {
      Gets data from OWM JSON and jpLocationServiceCityAndLocation object and create jpWeatherServiceToday object with correct values
      - Parameter json: OWM JSON
      - Parameter city: City name, longitude, latitude
-     - Returns: Info abyout weather (jpWeatherServiceToday)
+     - Returns: Info abyout weather (ForecastToday)
      - Throws: jpWeatherServiceError.badDataFormat if some value is incorrect or missing (check detail text)
      */
-    internal func sourceJsonToServiceStruct(json: [String:Any], city: jpLocationServiceCityAndLocation) throws -> jpWeatherServiceToday {
+    internal func sourceJsonToServiceStruct(json: [String:Any], city: jpLocationServiceCityAndLocation) throws -> ForecastToday {
         guard let clouds = json["clouds"] as? [String: Any] else {
             throw jpWeatherServiceError.badDataFormat(detail: "Missing 'clouds' property")
         }
@@ -184,7 +153,7 @@ class jpWeatherService: NSObject {
         let weatherImg = self.sourceImageNameToAppImageName(weatherCode)
         let mapUrl = self.getShareDataUrl(latitude: city.latitude, longitude: city.longitude)
         
-        return jpWeatherServiceToday(weatherImg: weatherImg, cityName: cityName, tempWeather: weatherText, cloudness: cloudnessText, humidity: humidityText, pressure: pressureText, windSpeed: windSpeedText, windDirection: windDirectionText, mapUrl: mapUrl)
+        return ForecastToday(weatherImg: weatherImg, cityName: cityName, tempWeather: weatherText, cloudness: cloudnessText, humidity: humidityText, pressure: pressureText, windSpeed: windSpeedText, windDirection: windDirectionText, mapUrl: mapUrl)
     }
     
     /**
@@ -298,12 +267,12 @@ class jpWeatherService: NSObject {
      Returns observable for checking current weather for city from parameter cityData
      
      Returns:
-     - onNext: jpWeatherServiceToday object
+     - onNext: ForecastToday object
      - onError: jpWeatherServiceError object
      
      - Parameter cityData: data about city
      */
-    public func getTodayForecastObservable(cityData: jpLocationServiceCityAndLocation) -> Observable<jpWeatherServiceToday> {
+    public func getTodayForecastObservable(cityData: jpLocationServiceCityAndLocation) -> Observable<ForecastToday> {
         return Observable.create{ observer in
             let url = self.getSourceDataUrl(latitude: cityData.latitude, longitude: cityData.longitude, forecastType: jpWeatherServiceForecastType.today)
             let task = URLSession.shared.dataTask(with: url) { data, response, error in

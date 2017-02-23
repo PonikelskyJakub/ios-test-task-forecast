@@ -28,6 +28,7 @@
 		3BC567E81E487798008F6FE1 /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3BC567E41E487798008F6FE1 /* ProximaNova-Semibold.otf */; };
 		3BC567EC1E487E8C008F6FE1 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC567EB1E487E8C008F6FE1 /* UIImageExtension.swift */; };
 		3BC567EE1E4881AE008F6FE1 /* jpForecastNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC567ED1E4881AE008F6FE1 /* jpForecastNavigationController.swift */; };
+		3BD2DB851E5F5ED000A6307C /* ForecastToday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD2DB841E5F5ED000A6307C /* ForecastToday.swift */; };
 		3BEA14271E4B1B8400814E1F /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEA14261E4B1B8400814E1F /* Reachability.swift */; };
 		3BEB72F51E4DBBB60038D076 /* jpForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB72F41E4DBBB60038D076 /* jpForecastViewController.swift */; };
 		3BEB72F71E4DEA3F0038D076 /* jpForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB72F61E4DEA3F0038D076 /* jpForecastTableViewCell.swift */; };
@@ -72,6 +73,7 @@
 		3BC567E41E487798008F6FE1 /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
 		3BC567EB1E487E8C008F6FE1 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		3BC567ED1E4881AE008F6FE1 /* jpForecastNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = jpForecastNavigationController.swift; path = "Test App - Forecast/Classes/Controller/jpForecastNavigationController.swift"; sourceTree = SOURCE_ROOT; };
+		3BD2DB841E5F5ED000A6307C /* ForecastToday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastToday.swift; sourceTree = "<group>"; };
 		3BEA14261E4B1B8400814E1F /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3BEB72F41E4DBBB60038D076 /* jpForecastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpForecastViewController.swift; sourceTree = "<group>"; };
 		3BEB72F61E4DEA3F0038D076 /* jpForecastTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpForecastTableViewCell.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				3B973FA11E2CC43B00A391A1 /* jpLocationService.swift */,
 				3B140DBE1E49F50A00737446 /* jpWeatherService.swift */,
 				3BB3E91F1E5334AA0025A47A /* jpCoreDataService.swift */,
+				3BD2DB841E5F5ED000A6307C /* ForecastToday.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				3BB9DDC11E4497D5003B8C89 /* CLLocationManager+Rx.swift in Sources */,
 				3BC567EC1E487E8C008F6FE1 /* UIImageExtension.swift in Sources */,
 				3BB3E9201E5334AA0025A47A /* jpCoreDataService.swift in Sources */,
+				3BD2DB851E5F5ED000A6307C /* ForecastToday.swift in Sources */,
 				3BEB72F91E4DFEA20038D076 /* Utilities.swift in Sources */,
 				3B973FA21E2CC43B00A391A1 /* jpLocationService.swift in Sources */,
 				3BC567EE1E4881AE008F6FE1 /* jpForecastNavigationController.swift in Sources */,
