@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B0587AD1E5C761F008301CB /* ForecastTimemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0587AC1E5C761F008301CB /* ForecastTimemark.swift */; };
 		3B140DBF1E49F50A00737446 /* jpWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B140DBE1E49F50A00737446 /* jpWeatherService.swift */; };
 		3B4568111E267A5000A5ADE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4568101E267A5000A5ADE8 /* AppDelegate.swift */; };
 		3B4568161E267A5000A5ADE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B4568141E267A5000A5ADE8 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 		3B45681E1E267A5000A5ADE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B45681C1E267A5000A5ADE8 /* LaunchScreen.storyboard */; };
 		3B4BCAA91E4C79E9000762AA /* TodayTests_ForecastApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BCAA81E4C79E9000762AA /* TodayTests_ForecastApp.swift */; };
 		3B973FA21E2CC43B00A391A1 /* jpLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B973FA11E2CC43B00A391A1 /* jpLocationService.swift */; };
+		3BB3E9201E5334AA0025A47A /* jpCoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3E91F1E5334AA0025A47A /* jpCoreDataService.swift */; };
 		3BB9DDC11E4497D5003B8C89 /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB9DDC01E4497D5003B8C89 /* CLLocationManager+Rx.swift */; };
 		3BB9DDC31E44980F003B8C89 /* RxCLLocationManagerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB9DDC21E44980F003B8C89 /* RxCLLocationManagerDelegateProxy.swift */; };
 		3BB9DDC91E449BE4003B8C89 /* jpTodayWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB9DDC81E449BE4003B8C89 /* jpTodayWeatherViewController.swift */; };
@@ -45,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B0587AC1E5C761F008301CB /* ForecastTimemark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastTimemark.swift; sourceTree = "<group>"; };
 		3B140DBE1E49F50A00737446 /* jpWeatherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpWeatherService.swift; sourceTree = "<group>"; };
 		3B45680D1E267A5000A5ADE8 /* Test App - Forecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test App - Forecast.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4568101E267A5000A5ADE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +60,7 @@
 		3B45682A1E267A5000A5ADE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B4BCAA81E4C79E9000762AA /* TodayTests_ForecastApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayTests_ForecastApp.swift; sourceTree = "<group>"; };
 		3B973FA11E2CC43B00A391A1 /* jpLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpLocationService.swift; sourceTree = "<group>"; };
+		3BB3E91F1E5334AA0025A47A /* jpCoreDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpCoreDataService.swift; sourceTree = "<group>"; };
 		3BB9DDC01E4497D5003B8C89 /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
 		3BB9DDC21E44980F003B8C89 /* RxCLLocationManagerDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCLLocationManagerDelegateProxy.swift; sourceTree = "<group>"; };
 		3BB9DDC81E449BE4003B8C89 /* jpTodayWeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpTodayWeatherViewController.swift; sourceTree = "<group>"; };
@@ -206,9 +210,11 @@
 		3BBA299E1E267B7800EF396E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3B0587AC1E5C761F008301CB /* ForecastTimemark.swift */,
 				3B4568171E267A5000A5ADE8 /* Test_App___Forecast.xcdatamodeld */,
 				3B973FA11E2CC43B00A391A1 /* jpLocationService.swift */,
 				3B140DBE1E49F50A00737446 /* jpWeatherService.swift */,
+				3BB3E91F1E5334AA0025A47A /* jpCoreDataService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -307,12 +313,10 @@
 				TargetAttributes = {
 					3B45680C1E267A5000A5ADE8 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = WU5Z456Y3P;
 						ProvisioningStyle = Automatic;
 					};
 					3B4568231E267A5000A5ADE8 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = WU5Z456Y3P;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 3B45680C1E267A5000A5ADE8;
 					};
@@ -461,10 +465,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B0587AD1E5C761F008301CB /* ForecastTimemark.swift in Sources */,
 				3BEB72F71E4DEA3F0038D076 /* jpForecastTableViewCell.swift in Sources */,
 				3B4568111E267A5000A5ADE8 /* AppDelegate.swift in Sources */,
 				3BB9DDC11E4497D5003B8C89 /* CLLocationManager+Rx.swift in Sources */,
 				3BC567EC1E487E8C008F6FE1 /* UIImageExtension.swift in Sources */,
+				3BB3E9201E5334AA0025A47A /* jpCoreDataService.swift in Sources */,
 				3BEB72F91E4DFEA20038D076 /* Utilities.swift in Sources */,
 				3B973FA21E2CC43B00A391A1 /* jpLocationService.swift in Sources */,
 				3BC567EE1E4881AE008F6FE1 /* jpForecastNavigationController.swift in Sources */,
@@ -628,7 +634,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = WU5Z456Y3P;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Test App - Forecast/Vendor/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -644,7 +650,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = WU5Z456Y3P;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Test App - Forecast/Vendor/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -660,7 +666,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = WU5Z456Y3P;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Test App - ForecastTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cz.ponikelsky.Test-App---ForecastTests";
@@ -676,7 +682,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = WU5Z456Y3P;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Test App - ForecastTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cz.ponikelsky.Test-App---ForecastTests";

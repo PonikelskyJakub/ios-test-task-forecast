@@ -8,36 +8,54 @@
 
 import RxSwift
 import RxCocoa
+import RxDataSources
+import RxCoreData
 import UIKit
 
 class jpForecastViewController: UIViewController {
 
     @IBOutlet weak var forecastTableView: UITableView!
     
-    /// Variable with tableView data
-    fileprivate var forecastData: Variable<Array<jpWeatherServiceForecast>> = Variable(Array())
-    
     /// Dispose bag for deallocating of observers.
     private let disposeBag = DisposeBag()
 
     /**
-     Init VC, create observer for data visible in tableview, fill table view with test data, change title
+     Init VC, check location change (change title, start weather data obtaining task), check CoreData entity anc actualize tableView.
      */
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.forecastData.asObservable().subscribe(onNext: { n in
-            self.forecastTableView.reloadData()
+        let weatherService = jpWeatherService.instance
+        let locationService = jpLocationService.instance
+        
+        locationService.actualCityData.asObservable().subscribe(onNext: { n in
+            if let data = n {
+                self.tabBarController?.title = locationService.actualCityData.value?.name;
+
+                weatherService.getWeekForecastObservable(cityData: data).observeOn(MainScheduler.instance).subscribe(onError:{n in
+                    if let err = n as? jpWeatherServiceError {
+                        switch err {
+                        case .noNetworkConnection:
+                            Utilities.showAlert(viewController: self, title: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TITLE", comment: "Error title"), text: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_NETWORK_TEXT", comment: "Error text"))
+                            return
+                        default:
+                            break;
+                        }
+                    }
+                    
+                    Utilities.showAlert(viewController: self, title: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TITLE", comment: "Error title"), text: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TEXT", comment: "Error text"))
+                }, onCompleted: {
+                }).addDisposableTo(self.disposeBag)
+            }
         }).addDisposableTo(self.disposeBag)
         
-        let locationService = jpLocationService.instance
-        locationService.actualCityData.asObservable().subscribe(onNext: { n in
-            self.tabBarController?.title = locationService.actualCityData.value?.name;
-
-            self.forecastData.value.append(jpWeatherServiceForecast(weatherImg: "ForecastWeatherIconImageViewCloudy", dayOfWeek: "Monday1", weatherDesc: "Cloudy", tempreature: "5°C"))
-            self.forecastData.value.append(jpWeatherServiceForecast(weatherImg: "ForecastWeatherIconImageViewCloudy", dayOfWeek: "Monday2", weatherDesc: "Cloudy", tempreature: "5°C"))
-            self.forecastData.value.append(jpWeatherServiceForecast(weatherImg: "ForecastWeatherIconImageViewCloudy", dayOfWeek: "Monday3", weatherDesc: "Cloudy", tempreature: "5°C"))
-        }).addDisposableTo(self.disposeBag)
+        jpCoreDataService.instance.managedObjectContext.rx.entities(ForecastTimemark.self,
+                                         sortDescriptors: [NSSortDescriptor(key: "datetime", ascending: true)])
+            .bindTo(forecastTableView.rx.items(cellIdentifier: "jpForecastTableViewCell")) { row, event, cell in
+                let cell = cell as! jpForecastTableViewCell
+                cell.fillTableViewCell(object: event)
+            }
+            .addDisposableTo(self.disposeBag)
     }
     
     /// Changes title of screen when VC is active
@@ -47,36 +65,3 @@ class jpForecastViewController: UIViewController {
         self.tabBarController?.title = locationService.actualCityData.value?.name;
     }
 }
-
-// MARK: - Table View Data Source
-
-extension jpForecastViewController: UITableViewDataSource {
-    /**
-     Returns count of data objects
-     */
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.forecastData.value.count
-    }
-    
-    /**
-     Return filled cell
-     */
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "jpForecastTableViewCell") as! jpForecastTableViewCell
-        cell.fillTableViewCell(object: self.forecastData.value[indexPath.row])
-        return cell
-    }
-}
-
-// MARK: - Table View Delegate
-
-extension jpForecastViewController: UITableViewDelegate {
-    /**
-     Nothing - unselectable cells
-     */
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    }
-}
-
-
-

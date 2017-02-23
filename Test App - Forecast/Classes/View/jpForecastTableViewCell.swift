@@ -17,10 +17,10 @@ class jpForecastTableViewCell: UITableViewCell {
     /**
      Fill all labels and images in cell
      */
-    public func fillTableViewCell(object: jpWeatherServiceForecast){
-        self.weatherImageView.image = UIImage(named: object.weatherImg)
-        self.dayOfWeekLabel.text = object.dayOfWeek
-        self.weatherDescriptionLabel.text = object.weatherDesc
-        self.temperatureLabel.text = object.tempreature
+    public func fillTableViewCell(object: ForecastTimemark){
+        self.dayOfWeekLabel.text = "\(object.getDateInFormat())"
+        self.weatherImageView.image = UIImage(named: object.weather_icon)
+        self.weatherDescriptionLabel.text = object.weather_text
+        self.temperatureLabel.text = "\(object.getTemperatureString())"
     }
 }

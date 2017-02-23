@@ -32,4 +32,5 @@
 "SHARE_DEFAULT_MESSAGE" = "WeatherMap";
 "SHARE_MESSAGE_PREFIX" = "WeatherMap";
 
+"DATEFORMAT_TABLE_WEATHER" = "EEE hh:mm a";
 
