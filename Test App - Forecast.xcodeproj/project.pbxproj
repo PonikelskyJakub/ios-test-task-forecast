@@ -30,6 +30,7 @@
 		3BD2DB8D1E5F853000A6307C /* jpForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD2DB8B1E5F853000A6307C /* jpForecastViewController.swift */; };
 		3BD2DB8E1E5F853000A6307C /* jpTodayWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD2DB8C1E5F853000A6307C /* jpTodayWeatherViewController.swift */; };
 		3BD2DB901E5F853B00A6307C /* jpForecastNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD2DB8F1E5F853B00A6307C /* jpForecastNavigationController.swift */; };
+		3BD2DB921E5F86B200A6307C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD2DB911E5F86B200A6307C /* Config.swift */; };
 		3BEA14271E4B1B8400814E1F /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEA14261E4B1B8400814E1F /* Reachability.swift */; };
 		3BEB72F71E4DEA3F0038D076 /* jpForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB72F61E4DEA3F0038D076 /* jpForecastTableViewCell.swift */; };
 		3BEB72F91E4DFEA20038D076 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB72F81E4DFEA20038D076 /* Utilities.swift */; };
@@ -75,6 +76,7 @@
 		3BD2DB8B1E5F853000A6307C /* jpForecastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpForecastViewController.swift; sourceTree = "<group>"; };
 		3BD2DB8C1E5F853000A6307C /* jpTodayWeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpTodayWeatherViewController.swift; sourceTree = "<group>"; };
 		3BD2DB8F1E5F853B00A6307C /* jpForecastNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpForecastNavigationController.swift; sourceTree = "<group>"; };
+		3BD2DB911E5F86B200A6307C /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		3BEA14261E4B1B8400814E1F /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3BEB72F61E4DEA3F0038D076 /* jpForecastTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpForecastTableViewCell.swift; sourceTree = "<group>"; };
 		3BEB72F81E4DFEA20038D076 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				3BB9DDCE1E449FFE003B8C89 /* InfoPlist.strings */,
 				3BB9DDD51E44AF1B003B8C89 /* Localizable.strings */,
 				3B45681A1E267A5000A5ADE8 /* Assets.xcassets */,
+				3BD2DB911E5F86B200A6307C /* Config.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -224,8 +227,8 @@
 			isa = PBXGroup;
 			children = (
 				3BD2DB8F1E5F853B00A6307C /* jpForecastNavigationController.swift */,
-				3BD2DB861E5F603F00A6307C /* ViewController */,
 				3BEB72F61E4DEA3F0038D076 /* jpForecastTableViewCell.swift */,
+				3BD2DB861E5F603F00A6307C /* ViewController */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				3BEB72F71E4DEA3F0038D076 /* jpForecastTableViewCell.swift in Sources */,
 				3B4568111E267A5000A5ADE8 /* AppDelegate.swift in Sources */,
 				3BD2DB8E1E5F853000A6307C /* jpTodayWeatherViewController.swift in Sources */,
+				3BD2DB921E5F86B200A6307C /* Config.swift in Sources */,
 				3BD2DB901E5F853B00A6307C /* jpForecastNavigationController.swift in Sources */,
 				3BB9DDC11E4497D5003B8C89 /* CLLocationManager+Rx.swift in Sources */,
 				3BC567EC1E487E8C008F6FE1 /* UIImageExtension.swift in Sources */,

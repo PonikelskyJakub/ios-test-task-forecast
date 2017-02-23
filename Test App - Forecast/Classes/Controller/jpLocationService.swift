@@ -18,7 +18,7 @@ public struct jpLocationServiceCityAndLocation {
 
 extension jpLocationServiceCityAndLocation: Equatable {
     /// Comparation of two jpLocationServiceCityAndLocation struct
-    public static func ==(lhs: jpLocationServiceCityAndLocation, rhs: jpLocationServiceCityAndLocation) -> Bool {
+    public static func == (lhs: jpLocationServiceCityAndLocation, rhs: jpLocationServiceCityAndLocation) -> Bool {
         let areEqual = lhs.latitude == rhs.latitude &&
             lhs.longitude == rhs.longitude &&
             lhs.name == rhs.name
@@ -54,7 +54,7 @@ class jpLocationService: NSObject {
     private override init(){
         super.init();
 
-        self.locationManager.distanceFilter = 1000.0
+        self.locationManager.distanceFilter = Config.locationManager.distanceFilter
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
     }
     

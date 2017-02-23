@@ -22,10 +22,10 @@ class jpTodayWeatherViewController: UIViewController {
     @IBOutlet weak var labelWindDirection: UILabel!
     
     /// Share button URL.
-    private var outputUrl: URL = URL(string:"http://openweathermap.org/weathermap")!
+    private var outputUrl: URL = URL(string: Config.openWeatherMap.mapUrl)!
     
     /// Share button text.
-    private var outputText: String = NSLocalizedString("SHARE_DEFAULT_MESSAGE", comment: "Default share msg")
+    private var outputText: String = Config.share.defaultMapMsg
 
     /// Dispose bag for deallocating of observers.
     private let disposeBag = DisposeBag()

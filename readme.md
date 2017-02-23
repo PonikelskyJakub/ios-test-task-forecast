@@ -27,7 +27,7 @@ pod install
 open Test App - Forecast.xcworkspace
 ```
 
-Open `XXX` and replace `XXX` with your Open Weather Map API key and build project.
+Open `Resources/Config.swift` and replace `Config.openWeatherMap.appId` with your Open Weather Map API key and build project.
 
 ##Task
 Create a simple iOS app for weather forecasting. The app should support iOS version 9 and newer. The project must be possible to compile with Swift 3.0 and in the last production version of XCode. It basically shows actual weather for your location. In the Forecast tab show the forecast for next 7 days at current location.
@@ -54,9 +54,8 @@ All graphic elements and assets are located in "Description" folder as this docu
 - Title of Forecast section from Core Data.
 - Stop task getting data before new one.
 - Move some function to libs or make them static.
-- Extract OWM ID from code to file.
 - Unit tests for Forecast section (protocol for Core Data saving).
 - Unit test for Observable.mapLocationToCityName extension.
-- Ignored parts.
 - Landscape mode of app.
 - UI tests.
+- Ignored parts.

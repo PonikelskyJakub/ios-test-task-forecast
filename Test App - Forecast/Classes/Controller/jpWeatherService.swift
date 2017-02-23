@@ -247,9 +247,9 @@ class jpWeatherService: NSObject {
     private func getSourceDataUrl(latitude: Double, longitude: Double, forecastType: jpWeatherServiceForecastType) -> URL{
         switch forecastType {
         case jpWeatherServiceForecastType.fiveDays:
-            return URL(string: "http://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&appid=18f1e34ef94fff88795abb0a8363619b&units=metric")!
+            return URL(string: "\(Config.openWeatherMap.apiUrl)/forecast?lat=\(latitude)&lon=\(longitude)&appid=\(Config.openWeatherMap.appId)&units=metric")!
         case jpWeatherServiceForecastType.today:
-            return URL(string: "http://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=18f1e34ef94fff88795abb0a8363619b&units=metric")!
+            return URL(string: "\(Config.openWeatherMap.apiUrl)/weather?lat=\(latitude)&lon=\(longitude)&appid=\(Config.openWeatherMap.appId)&units=metric")!
         }
     }
     
@@ -260,7 +260,7 @@ class jpWeatherService: NSObject {
      - Returns: Correct URL
      */
     internal func getShareDataUrl(latitude: Double, longitude: Double) -> URL{
-        return URL(string: "http://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=\(latitude)&lon=\(longitude)&zoom=8")!
+        return URL(string: "\(Config.openWeatherMap.mapUrl)?basemap=map&cities=true&layer=temperature&lat=\(latitude)&lon=\(longitude)&zoom=8")!
     }
     
     /**
