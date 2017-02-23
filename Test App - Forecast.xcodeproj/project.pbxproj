@@ -8,18 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		3B0587AD1E5C761F008301CB /* ForecastTimemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0587AC1E5C761F008301CB /* ForecastTimemark.swift */; };
-		3B140DBF1E49F50A00737446 /* jpWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B140DBE1E49F50A00737446 /* jpWeatherService.swift */; };
 		3B4568111E267A5000A5ADE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4568101E267A5000A5ADE8 /* AppDelegate.swift */; };
 		3B4568161E267A5000A5ADE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B4568141E267A5000A5ADE8 /* Main.storyboard */; };
 		3B4568191E267A5000A5ADE8 /* Test_App___Forecast.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B4568171E267A5000A5ADE8 /* Test_App___Forecast.xcdatamodeld */; };
 		3B45681B1E267A5000A5ADE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B45681A1E267A5000A5ADE8 /* Assets.xcassets */; };
 		3B45681E1E267A5000A5ADE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B45681C1E267A5000A5ADE8 /* LaunchScreen.storyboard */; };
 		3B4BCAA91E4C79E9000762AA /* TodayTests_ForecastApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BCAA81E4C79E9000762AA /* TodayTests_ForecastApp.swift */; };
-		3B973FA21E2CC43B00A391A1 /* jpLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B973FA11E2CC43B00A391A1 /* jpLocationService.swift */; };
 		3BB3E9201E5334AA0025A47A /* jpCoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3E91F1E5334AA0025A47A /* jpCoreDataService.swift */; };
 		3BB9DDC11E4497D5003B8C89 /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB9DDC01E4497D5003B8C89 /* CLLocationManager+Rx.swift */; };
 		3BB9DDC31E44980F003B8C89 /* RxCLLocationManagerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB9DDC21E44980F003B8C89 /* RxCLLocationManagerDelegateProxy.swift */; };
-		3BB9DDC91E449BE4003B8C89 /* jpTodayWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB9DDC81E449BE4003B8C89 /* jpTodayWeatherViewController.swift */; };
 		3BB9DDCC1E449FFE003B8C89 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3BB9DDCE1E449FFE003B8C89 /* InfoPlist.strings */; };
 		3BB9DDD31E44AF1B003B8C89 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3BB9DDD51E44AF1B003B8C89 /* Localizable.strings */; };
 		3BC567E51E487798008F6FE1 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3BC567E11E487798008F6FE1 /* ProximaNova-Bold.otf */; };
@@ -27,10 +24,13 @@
 		3BC567E71E487798008F6FE1 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3BC567E31E487798008F6FE1 /* ProximaNova-Regular.otf */; };
 		3BC567E81E487798008F6FE1 /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3BC567E41E487798008F6FE1 /* ProximaNova-Semibold.otf */; };
 		3BC567EC1E487E8C008F6FE1 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC567EB1E487E8C008F6FE1 /* UIImageExtension.swift */; };
-		3BC567EE1E4881AE008F6FE1 /* jpForecastNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC567ED1E4881AE008F6FE1 /* jpForecastNavigationController.swift */; };
 		3BD2DB851E5F5ED000A6307C /* ForecastToday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD2DB841E5F5ED000A6307C /* ForecastToday.swift */; };
+		3BD2DB891E5F851E00A6307C /* jpLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD2DB871E5F851E00A6307C /* jpLocationService.swift */; };
+		3BD2DB8A1E5F851E00A6307C /* jpWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD2DB881E5F851E00A6307C /* jpWeatherService.swift */; };
+		3BD2DB8D1E5F853000A6307C /* jpForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD2DB8B1E5F853000A6307C /* jpForecastViewController.swift */; };
+		3BD2DB8E1E5F853000A6307C /* jpTodayWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD2DB8C1E5F853000A6307C /* jpTodayWeatherViewController.swift */; };
+		3BD2DB901E5F853B00A6307C /* jpForecastNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD2DB8F1E5F853B00A6307C /* jpForecastNavigationController.swift */; };
 		3BEA14271E4B1B8400814E1F /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEA14261E4B1B8400814E1F /* Reachability.swift */; };
-		3BEB72F51E4DBBB60038D076 /* jpForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB72F41E4DBBB60038D076 /* jpForecastViewController.swift */; };
 		3BEB72F71E4DEA3F0038D076 /* jpForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB72F61E4DEA3F0038D076 /* jpForecastTableViewCell.swift */; };
 		3BEB72F91E4DFEA20038D076 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB72F81E4DFEA20038D076 /* Utilities.swift */; };
 		3E432A0DB280391D4A27BEFE /* Pods_Test_App___ForecastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEF359E79E7F3E8936B5B46 /* Pods_Test_App___ForecastTests.framework */; };
@@ -49,22 +49,19 @@
 
 /* Begin PBXFileReference section */
 		3B0587AC1E5C761F008301CB /* ForecastTimemark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastTimemark.swift; sourceTree = "<group>"; };
-		3B140DBE1E49F50A00737446 /* jpWeatherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpWeatherService.swift; sourceTree = "<group>"; };
 		3B45680D1E267A5000A5ADE8 /* Test App - Forecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test App - Forecast.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4568101E267A5000A5ADE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B4568151E267A5000A5ADE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3B4568181E267A5000A5ADE8 /* Test_App___Forecast.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Test_App___Forecast.xcdatamodel"; sourceTree = "<group>"; };
-		3B45681A1E267A5000A5ADE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
+		3B45681A1E267A5000A5ADE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B45681D1E267A5000A5ADE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B45681F1E267A5000A5ADE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B4568241E267A5000A5ADE8 /* Test App - ForecastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Test App - ForecastTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B45682A1E267A5000A5ADE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B4BCAA81E4C79E9000762AA /* TodayTests_ForecastApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayTests_ForecastApp.swift; sourceTree = "<group>"; };
-		3B973FA11E2CC43B00A391A1 /* jpLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpLocationService.swift; sourceTree = "<group>"; };
 		3BB3E91F1E5334AA0025A47A /* jpCoreDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpCoreDataService.swift; sourceTree = "<group>"; };
 		3BB9DDC01E4497D5003B8C89 /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
 		3BB9DDC21E44980F003B8C89 /* RxCLLocationManagerDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCLLocationManagerDelegateProxy.swift; sourceTree = "<group>"; };
-		3BB9DDC81E449BE4003B8C89 /* jpTodayWeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpTodayWeatherViewController.swift; sourceTree = "<group>"; };
 		3BB9DDCD1E449FFE003B8C89 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3BB9DDD41E44AF1B003B8C89 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3BC567E11E487798008F6FE1 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
@@ -72,10 +69,13 @@
 		3BC567E31E487798008F6FE1 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		3BC567E41E487798008F6FE1 /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
 		3BC567EB1E487E8C008F6FE1 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
-		3BC567ED1E4881AE008F6FE1 /* jpForecastNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = jpForecastNavigationController.swift; path = "Test App - Forecast/Classes/Controller/jpForecastNavigationController.swift"; sourceTree = SOURCE_ROOT; };
 		3BD2DB841E5F5ED000A6307C /* ForecastToday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastToday.swift; sourceTree = "<group>"; };
+		3BD2DB871E5F851E00A6307C /* jpLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpLocationService.swift; sourceTree = "<group>"; };
+		3BD2DB881E5F851E00A6307C /* jpWeatherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpWeatherService.swift; sourceTree = "<group>"; };
+		3BD2DB8B1E5F853000A6307C /* jpForecastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpForecastViewController.swift; sourceTree = "<group>"; };
+		3BD2DB8C1E5F853000A6307C /* jpTodayWeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpTodayWeatherViewController.swift; sourceTree = "<group>"; };
+		3BD2DB8F1E5F853B00A6307C /* jpForecastNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpForecastNavigationController.swift; sourceTree = "<group>"; };
 		3BEA14261E4B1B8400814E1F /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		3BEB72F41E4DBBB60038D076 /* jpForecastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpForecastViewController.swift; sourceTree = "<group>"; };
 		3BEB72F61E4DEA3F0038D076 /* jpForecastTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = jpForecastTableViewCell.swift; sourceTree = "<group>"; };
 		3BEB72F81E4DFEA20038D076 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		59F0222BEBBFBD5E8C6AD313 /* Pods-Test App - ForecastTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test App - ForecastTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Test App - ForecastTests/Pods-Test App - ForecastTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -142,7 +142,6 @@
 			children = (
 				3BB9DDBF1E449786003B8C89 /* Extensions */,
 				3BBA299B1E267AAC00EF396E /* Resources */,
-				3B45681A1E267A5000A5ADE8 /* Assets.xcassets */,
 				3BBA299A1E267A9D00EF396E /* Classes */,
 				3BBA299C1E267AB300EF396E /* Vendor */,
 			);
@@ -188,6 +187,7 @@
 				3BBA299D1E267AC300EF396E /* Storyboards */,
 				3BB9DDCE1E449FFE003B8C89 /* InfoPlist.strings */,
 				3BB9DDD51E44AF1B003B8C89 /* Localizable.strings */,
+				3B45681A1E267A5000A5ADE8 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -214,8 +214,6 @@
 			children = (
 				3B0587AC1E5C761F008301CB /* ForecastTimemark.swift */,
 				3B4568171E267A5000A5ADE8 /* Test_App___Forecast.xcdatamodeld */,
-				3B973FA11E2CC43B00A391A1 /* jpLocationService.swift */,
-				3B140DBE1E49F50A00737446 /* jpWeatherService.swift */,
 				3BB3E91F1E5334AA0025A47A /* jpCoreDataService.swift */,
 				3BD2DB841E5F5ED000A6307C /* ForecastToday.swift */,
 			);
@@ -225,6 +223,8 @@
 		3BBA299F1E267B8000EF396E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3BD2DB8F1E5F853B00A6307C /* jpForecastNavigationController.swift */,
+				3BD2DB861E5F603F00A6307C /* ViewController */,
 				3BEB72F61E4DEA3F0038D076 /* jpForecastTableViewCell.swift */,
 			);
 			path = View;
@@ -233,9 +233,8 @@
 		3BBA29A01E267B8700EF396E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				3BC567ED1E4881AE008F6FE1 /* jpForecastNavigationController.swift */,
-				3BB9DDC81E449BE4003B8C89 /* jpTodayWeatherViewController.swift */,
-				3BEB72F41E4DBBB60038D076 /* jpForecastViewController.swift */,
+				3BD2DB871E5F851E00A6307C /* jpLocationService.swift */,
+				3BD2DB881E5F851E00A6307C /* jpWeatherService.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -249,6 +248,15 @@
 				3BC567E41E487798008F6FE1 /* ProximaNova-Semibold.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		3BD2DB861E5F603F00A6307C /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3BD2DB8B1E5F853000A6307C /* jpForecastViewController.swift */,
+				3BD2DB8C1E5F853000A6307C /* jpTodayWeatherViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		FF6EBE1569D3BBB676AA0BD1 /* Frameworks */ = {
@@ -471,19 +479,19 @@
 				3B0587AD1E5C761F008301CB /* ForecastTimemark.swift in Sources */,
 				3BEB72F71E4DEA3F0038D076 /* jpForecastTableViewCell.swift in Sources */,
 				3B4568111E267A5000A5ADE8 /* AppDelegate.swift in Sources */,
+				3BD2DB8E1E5F853000A6307C /* jpTodayWeatherViewController.swift in Sources */,
+				3BD2DB901E5F853B00A6307C /* jpForecastNavigationController.swift in Sources */,
 				3BB9DDC11E4497D5003B8C89 /* CLLocationManager+Rx.swift in Sources */,
 				3BC567EC1E487E8C008F6FE1 /* UIImageExtension.swift in Sources */,
 				3BB3E9201E5334AA0025A47A /* jpCoreDataService.swift in Sources */,
 				3BD2DB851E5F5ED000A6307C /* ForecastToday.swift in Sources */,
 				3BEB72F91E4DFEA20038D076 /* Utilities.swift in Sources */,
-				3B973FA21E2CC43B00A391A1 /* jpLocationService.swift in Sources */,
-				3BC567EE1E4881AE008F6FE1 /* jpForecastNavigationController.swift in Sources */,
 				3BB9DDC31E44980F003B8C89 /* RxCLLocationManagerDelegateProxy.swift in Sources */,
 				3B4568191E267A5000A5ADE8 /* Test_App___Forecast.xcdatamodeld in Sources */,
-				3B140DBF1E49F50A00737446 /* jpWeatherService.swift in Sources */,
 				3BEA14271E4B1B8400814E1F /* Reachability.swift in Sources */,
-				3BB9DDC91E449BE4003B8C89 /* jpTodayWeatherViewController.swift in Sources */,
-				3BEB72F51E4DBBB60038D076 /* jpForecastViewController.swift in Sources */,
+				3BD2DB8A1E5F851E00A6307C /* jpWeatherService.swift in Sources */,
+				3BD2DB8D1E5F853000A6307C /* jpForecastViewController.swift in Sources */,
+				3BD2DB891E5F851E00A6307C /* jpLocationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -53,7 +53,6 @@ All graphic elements and assets are located in "Description" folder as this docu
 ##Posible improvements
 - Title of Forecast section from Core Data.
 - Stop task getting data before new one.
-- Change position of files in Model, View, Controller.
 - Move some function to libs or make them static.
 - Extract OWM ID from code to file.
 - Unit tests for Forecast section (protocol for Core Data saving).
