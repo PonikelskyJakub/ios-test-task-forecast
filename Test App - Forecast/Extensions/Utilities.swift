@@ -16,7 +16,7 @@ class Utilities{
      - Parameter title: Title of popup.
      - Parameter text: Text in popup.
      */
-    public static func showAlert(viewController: UIViewController?, title: String, text: String) -> Void{
+    public static func showAlert(in viewController: UIViewController?, withTitle title: String, andText text: String) -> Void{
         if let vc = viewController {
             let alert = UIAlertController(title: title, message: text, preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("WARNING_POPUPS_DISMISS_BUTTON", comment: "OK"), style: UIAlertActionStyle.destructive, handler: nil))

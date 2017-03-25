@@ -67,7 +67,7 @@ class jpLocationService: NSObject {
         self.getAuthorizationDriver().drive(onNext:{n in
             if(n == jpLocationServiceStatus.disallow){
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                Utilities.showAlert(viewController: appDelegate.window?.rootViewController, title: NSLocalizedString("WARNING_POPUPS_LOCALIZATION_DISABLED_TITLE", comment: "Error title"), text: NSLocalizedString("WARNING_POPUPS_LOCALIZATION_DISABLED_TEXT", comment: "Error text"))
+                Utilities.showAlert(in: appDelegate.window?.rootViewController, withTitle: NSLocalizedString("WARNING_POPUPS_LOCALIZATION_DISABLED_TITLE", comment: "Error title"), andText: NSLocalizedString("WARNING_POPUPS_LOCALIZATION_DISABLED_TEXT", comment: "Error text"))
             }
         }).addDisposableTo(disposeBag)
         
@@ -80,14 +80,14 @@ class jpLocationService: NSObject {
             if let err = n as? jpLocationServiceError {
                 switch err {
                 case .noNetworkConnection:
-                    Utilities.showAlert(viewController: appDelegate.window?.rootViewController, title: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TITLE", comment: "Error title"), text: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_NETWORK_TEXT", comment: "Error text"))
+                    Utilities.showAlert(in: appDelegate.window?.rootViewController, withTitle: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TITLE", comment: "Error title"), andText: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_NETWORK_TEXT", comment: "Error text"))
                     return
                 default:
                     break;
                 }
             }
             
-            Utilities.showAlert(viewController: appDelegate.window?.rootViewController, title: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TITLE", comment: "Error title"), text: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TEXT", comment: "Error text"))
+            Utilities.showAlert(in: appDelegate.window?.rootViewController, withTitle: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TITLE", comment: "Error title"), andText: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TEXT", comment: "Error text"))
             self.stopUpdatingLocation()
         },onCompleted: {
             self.stopUpdatingLocation()

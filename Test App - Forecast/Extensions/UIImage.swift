@@ -14,7 +14,7 @@ extension UIImage {
      - Parameter newWidth: new width value
      - Returns: Image in new width
      */
-    func scaleImageToWidth (_ newWidth: CGFloat) -> UIImage? {
+    func scaleImage(toWidth newWidth: CGFloat) -> UIImage? {
         let scale = newWidth / self.size.width
         let newHeight = self.size.height * scale
         UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))

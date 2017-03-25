@@ -62,14 +62,14 @@ class jpTodayWeatherViewController: UIViewController {
                     if let err = n as? jpWeatherServiceError {
                         switch err {
                         case .noNetworkConnection:
-                            Utilities.showAlert(viewController: self, title: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TITLE", comment: "Error title"), text: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_NETWORK_TEXT", comment: "Error text"))
+                            Utilities.showAlert(in: self, withTitle: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TITLE", comment: "Error title"), andText: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_NETWORK_TEXT", comment: "Error text"))
                             return
                         default:
                             break;
                         }
                     }
                     
-                    Utilities.showAlert(viewController: self, title: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TITLE", comment: "Error title"), text: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TEXT", comment: "Error text"))
+                    Utilities.showAlert(in: self, withTitle: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TITLE", comment: "Error title"), andText: NSLocalizedString("WARNING_POPUPS_DATA_CANNOT_BE_LOADED_TEXT", comment: "Error text"))
                 }, onCompleted: {
                 }).addDisposableTo(self.disposeBag)
             }

@@ -17,7 +17,7 @@ class jpForecastNavigationController: UINavigationController {
         super.viewDidLoad()
 
         self.navigationBar.setBackgroundImage(UIImage(named: "NavigationItemBackgroundImage"), for: .default)
-        let shadow = UIImage(named: "NavigationItemShadowImage")?.scaleImageToWidth(UIScreen.main.bounds.width)
+        let shadow = UIImage(named: "NavigationItemShadowImage")?.scaleImage(toWidth: UIScreen.main.bounds.width)
         self.navigationBar.shadowImage = shadow
     }
 }
