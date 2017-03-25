@@ -40,7 +40,7 @@ class jpWeatherService: NSObject {
      - Returns: Localizated string of direction (N, NE, SW etc.)
      - Throws: jpWeatherServiceError.badDataFormat if value is incorrect
      */
-    internal func windDegreeToDirection(_ degree: Int) throws -> String{
+    class func windDegreeToDirection(_ degree: Int) throws -> String{
         switch degree {
         case 0...22:
             return NSLocalizedString("WIND_DIRECTION_N", comment: "North");
@@ -70,7 +70,7 @@ class jpWeatherService: NSObject {
      - Parameter sourceImageName: name of image at OWM
      - Returns: Image name in app
      */
-    internal func sourceImageNameToAppImageName(_ sourceImageName: String) -> String{
+    class func sourceImageNameToAppImageName(_ sourceImageName: String) -> String{
         switch sourceImageName {
         case "01d", "01n":
             return "TodayWeatherIconImageViewSunny"
@@ -84,13 +84,13 @@ class jpWeatherService: NSObject {
     }
     
     /**
-     Gets data from OWM JSON and jpLocationServiceCityAndLocation object and create jpWeatherServiceToday object with correct values
+     Gets data from OWM JSON and jpLocationServiceCityAndLocation object and create ForecastToday object with correct values
      - Parameter json: OWM JSON
      - Parameter city: City name, longitude, latitude
      - Returns: Info abyout weather (ForecastToday)
      - Throws: jpWeatherServiceError.badDataFormat if some value is incorrect or missing (check detail text)
      */
-    internal func sourceJsonToServiceStruct(json: [String:Any], city: jpLocationServiceCityAndLocation) throws -> ForecastToday {
+    class func sourceJsonToServiceStruct(json: [String:Any], city: jpLocationServiceCityAndLocation) throws -> ForecastToday {
         guard let clouds = json["clouds"] as? [String: Any] else {
             throw jpWeatherServiceError.badDataFormat(detail: "Missing 'clouds' property")
         }
@@ -149,9 +149,9 @@ class jpWeatherService: NSObject {
         let pressureText: String = String(format: "%d %@", pressure, NSLocalizedString("PRESSURE_UNIT_HPA", comment: "hPascal"))
         let cityName: String = city.name
         let windSpeedText: String = String(format: "%.1f %@", windSpeed, NSLocalizedString("WIND_SPEED_UNIT_MPS", comment: "Meters per second"))
-        let windDirectionText = try self.windDegreeToDirection(windDeg)
-        let weatherImg = self.sourceImageNameToAppImageName(weatherCode)
-        let mapUrl = self.getShareDataUrl(latitude: city.latitude, longitude: city.longitude)
+        let windDirectionText = try jpWeatherService.windDegreeToDirection(windDeg)
+        let weatherImg = jpWeatherService.sourceImageNameToAppImageName(weatherCode)
+        let mapUrl = jpWeatherService.getShareDataUrl(latitude: city.latitude, longitude: city.longitude)
         
         return ForecastToday(weatherImg: weatherImg, cityName: cityName, tempWeather: weatherText, cloudness: cloudnessText, humidity: humidityText, pressure: pressureText, windSpeed: windSpeedText, windDirection: windDirectionText, mapUrl: mapUrl)
     }
@@ -160,10 +160,9 @@ class jpWeatherService: NSObject {
      Gets data from OWM JSON and jpLocationServiceCityAndLocation object and save it to Core Data
      - Parameter json: OWM JSON
      - Parameter city: City name, longitude, latitude
-     - Returns: Info abyout weather (jpWeatherServiceToday)
      - Throws: jpWeatherServiceError.badDataFormat if some value is incorrect or missing (check detail text)
      */
-    private func storeWeekForecastData(json: [String:Any], city: jpLocationServiceCityAndLocation) throws -> Void {
+    class func storeWeekForecastData(json: [String:Any], city: jpLocationServiceCityAndLocation) throws -> Void {
         guard let cityJson = json["city"] as? [String: Any] else {
             throw jpWeatherServiceError.badDataFormat(detail: "Missing 'city' property")
         }
@@ -227,7 +226,7 @@ class jpWeatherService: NSObject {
                 }
                 
                 do {
-                    try jpCoreDataService.instance.saveForecastTimeDetailObject(datetime: dateTime, temperature: temp, wearherDesc: weatherDesc, wearherIcon: self.sourceImageNameToAppImageName(weatherCode), wearherText: weatherDescDetail.capitalized)
+                    try jpCoreDataService.instance.saveForecastTimeDetailObject(datetime: dateTime, temperature: temp, wearherDesc: weatherDesc, wearherIcon: jpWeatherService.sourceImageNameToAppImageName(weatherCode), wearherText: weatherDescDetail.capitalized)
                 } catch {
                     throw jpWeatherServiceError.badDataFormat(detail: "Storing in Core Data problem")
                 }
@@ -244,7 +243,7 @@ class jpWeatherService: NSObject {
      - Parameter forecastType: type of forecast
      - Returns: Correct URL
      */
-    private func getSourceDataUrl(latitude: Double, longitude: Double, forecastType: jpWeatherServiceForecastType) -> URL{
+    class func getSourceDataUrl(latitude: Double, longitude: Double, forecastType: jpWeatherServiceForecastType) -> URL{
         switch forecastType {
         case jpWeatherServiceForecastType.fiveDays:
             return URL(string: "\(Config.openWeatherMap.apiUrl)/forecast?lat=\(latitude)&lon=\(longitude)&appid=\(Config.openWeatherMap.appId)&units=metric")!
@@ -259,7 +258,7 @@ class jpWeatherService: NSObject {
      - Parameter longitude: position longitude
      - Returns: Correct URL
      */
-    internal func getShareDataUrl(latitude: Double, longitude: Double) -> URL{
+    class func getShareDataUrl(latitude: Double, longitude: Double) -> URL{
         return URL(string: "\(Config.openWeatherMap.mapUrl)?basemap=map&cities=true&layer=temperature&lat=\(latitude)&lon=\(longitude)&zoom=8")!
     }
     
@@ -274,7 +273,7 @@ class jpWeatherService: NSObject {
      */
     public func getTodayForecastObservable(cityData: jpLocationServiceCityAndLocation) -> Observable<ForecastToday> {
         return Observable.create{ observer in
-            let url = self.getSourceDataUrl(latitude: cityData.latitude, longitude: cityData.longitude, forecastType: jpWeatherServiceForecastType.today)
+            let url = jpWeatherService.getSourceDataUrl(latitude: cityData.latitude, longitude: cityData.longitude, forecastType: jpWeatherServiceForecastType.today)
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 guard error == nil else {
                     observer.on(.error(jpWeatherServiceError.urlRequestProblem))
@@ -288,7 +287,7 @@ class jpWeatherService: NSObject {
                 
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
-                    observer.on(.next(try self.sourceJsonToServiceStruct(json: json, city: cityData)))
+                    observer.on(.next(try jpWeatherService.sourceJsonToServiceStruct(json: json, city: cityData)))
                     observer.on(.completed)
                 } catch let errorBDF as jpWeatherServiceError {
                     observer.on(.error(errorBDF))
@@ -316,7 +315,7 @@ class jpWeatherService: NSObject {
      */
     public func getWeekForecastObservable(cityData: jpLocationServiceCityAndLocation) -> Observable<Bool> {
         return Observable.create{ observer in
-            let url = self.getSourceDataUrl(latitude: cityData.latitude, longitude: cityData.longitude, forecastType: jpWeatherServiceForecastType.fiveDays)
+            let url = jpWeatherService.getSourceDataUrl(latitude: cityData.latitude, longitude: cityData.longitude, forecastType: jpWeatherServiceForecastType.fiveDays)
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 guard error == nil else {
                     observer.on(.error(jpWeatherServiceError.urlRequestProblem))
@@ -330,7 +329,7 @@ class jpWeatherService: NSObject {
                 
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
-                    try self.storeWeekForecastData(json: json, city: cityData)
+                    try jpWeatherService.storeWeekForecastData(json: json, city: cityData)
                     observer.on(.completed)
                 } catch let errorBDF as jpWeatherServiceError {
                     observer.on(.error(errorBDF))

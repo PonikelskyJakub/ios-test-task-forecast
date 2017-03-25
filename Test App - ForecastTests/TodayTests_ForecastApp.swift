@@ -28,64 +28,64 @@ class TodayTests_ForecastApp: XCTestCase {
     
     /// Checking jpWeatherService.sourceImageNameToAppImageName function
     func testImageResolving(){
-        XCTAssertEqual("TodayWeatherIconImageViewSunny", jpWeatherService.instance.sourceImageNameToAppImageName("01d"))
+        XCTAssertEqual("TodayWeatherIconImageViewSunny", jpWeatherService.sourceImageNameToAppImageName("01d"))
         
-        XCTAssertEqual("TodayWeatherIconImageViewStormy", jpWeatherService.instance.sourceImageNameToAppImageName("11n"))
+        XCTAssertEqual("TodayWeatherIconImageViewStormy", jpWeatherService.sourceImageNameToAppImageName("11n"))
         
-        XCTAssertEqual("TodayWeatherIconImageViewWindy", jpWeatherService.instance.sourceImageNameToAppImageName("50n"))
+        XCTAssertEqual("TodayWeatherIconImageViewWindy", jpWeatherService.sourceImageNameToAppImageName("50n"))
         
-        XCTAssertEqual("TodayWeatherIconImageViewCloudy", jpWeatherService.instance.sourceImageNameToAppImageName("example"))
+        XCTAssertEqual("TodayWeatherIconImageViewCloudy", jpWeatherService.sourceImageNameToAppImageName("example"))
         
-        XCTAssertEqual("TodayWeatherIconImageViewCloudy", jpWeatherService.instance.sourceImageNameToAppImageName("13d"))
+        XCTAssertEqual("TodayWeatherIconImageViewCloudy", jpWeatherService.sourceImageNameToAppImageName("13d"))
     }
     
     /// Checking jpWeatherService.windDegreeToDirection function
     func testDegreeToDirectionString() {
-        XCTAssertThrowsError(try jpWeatherService.instance.windDegreeToDirection(361))
+        XCTAssertThrowsError(try jpWeatherService.windDegreeToDirection(361))
         
-        XCTAssertThrowsError(try jpWeatherService.instance.windDegreeToDirection(1361))
+        XCTAssertThrowsError(try jpWeatherService.windDegreeToDirection(1361))
         
-        XCTAssertThrowsError(try jpWeatherService.instance.windDegreeToDirection(-1))
+        XCTAssertThrowsError(try jpWeatherService.windDegreeToDirection(-1))
         
-        XCTAssertThrowsError(try jpWeatherService.instance.windDegreeToDirection(-50))
+        XCTAssertThrowsError(try jpWeatherService.windDegreeToDirection(-50))
         
-        if let value = try? jpWeatherService.instance.windDegreeToDirection(10) {
+        if let value = try? jpWeatherService.windDegreeToDirection(10) {
             XCTAssertEqual(value, NSLocalizedString("WIND_DIRECTION_N", comment: "Test"))
         }
         
-        if let value = try? jpWeatherService.instance.windDegreeToDirection(35) {
+        if let value = try? jpWeatherService.windDegreeToDirection(35) {
             XCTAssertEqual(value, NSLocalizedString("WIND_DIRECTION_NE", comment: "Test"))
         }
         
-        if let value = try? jpWeatherService.instance.windDegreeToDirection(90) {
+        if let value = try? jpWeatherService.windDegreeToDirection(90) {
             XCTAssertEqual(value, NSLocalizedString("WIND_DIRECTION_E", comment: "Test"))
         }
         
-        if let value = try? jpWeatherService.instance.windDegreeToDirection(123) {
+        if let value = try? jpWeatherService.windDegreeToDirection(123) {
             XCTAssertEqual(value, NSLocalizedString("WIND_DIRECTION_SE", comment: "Test"))
         }
         
-        if let value = try? jpWeatherService.instance.windDegreeToDirection(185) {
+        if let value = try? jpWeatherService.windDegreeToDirection(185) {
             XCTAssertEqual(value, NSLocalizedString("WIND_DIRECTION_S", comment: "Test"))
         }
         
-        if let value = try? jpWeatherService.instance.windDegreeToDirection(210) {
+        if let value = try? jpWeatherService.windDegreeToDirection(210) {
             XCTAssertEqual(value, NSLocalizedString("WIND_DIRECTION_SW", comment: "Test"))
         }
         
-        if let value = try? jpWeatherService.instance.windDegreeToDirection(230) {
+        if let value = try? jpWeatherService.windDegreeToDirection(230) {
             XCTAssertEqual(value, NSLocalizedString("WIND_DIRECTION_SW", comment: "Test"))
         }
         
-        if let value = try? jpWeatherService.instance.windDegreeToDirection(271) {
+        if let value = try? jpWeatherService.windDegreeToDirection(271) {
             XCTAssertEqual(value, NSLocalizedString("WIND_DIRECTION_W", comment: "Test"))
         }
         
-        if let value = try? jpWeatherService.instance.windDegreeToDirection(310) {
+        if let value = try? jpWeatherService.windDegreeToDirection(310) {
             XCTAssertEqual(value, NSLocalizedString("WIND_DIRECTION_NW", comment: "Test"))
         }
         
-        if let value = try? jpWeatherService.instance.windDegreeToDirection(351) {
+        if let value = try? jpWeatherService.windDegreeToDirection(351) {
             XCTAssertEqual(value, NSLocalizedString("WIND_DIRECTION_N", comment: "Test"))
         }
     }
@@ -100,8 +100,8 @@ class TodayTests_ForecastApp: XCTestCase {
             let data: Data? = jsonString.data(using: String.Encoding.utf8)
             let anyObjJson: [String:Any] = try JSONSerialization.jsonObject(with: data!, options: []) as! [String:Any]
             
-            let struct1:jpWeatherServiceToday = try jpWeatherService.instance.sourceJsonToServiceStruct(json: anyObjJson, city: city)
-            let struct2 = jpWeatherServiceToday(weatherImg: "TodayWeatherIconImageViewCloudy", cityName: "Cupertino, United States", tempWeather: "16.4°C | Clouds", cloudness: "90%", humidity: "72%", pressure: "1017 hPA", windSpeed: "5.1 m/s", windDirection: "SW", mapUrl: URL(string: "http://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=37.3213765&lon=-122.03186554&zoom=8")!)
+            let struct1:ForecastToday = try jpWeatherService.sourceJsonToServiceStruct(json: anyObjJson, city: city)
+            let struct2 = ForecastToday(weatherImg: "TodayWeatherIconImageViewCloudy", cityName: "Cupertino, United States", tempWeather: "16.4°C | Clouds", cloudness: "90%", humidity: "72%", pressure: "1017 hPA", windSpeed: "5.1 m/s", windDirection: "SW", mapUrl: URL(string: "http://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=37.3213765&lon=-122.03186554&zoom=8")!)
             
             XCTAssert(struct1 == struct2)
         }
@@ -114,7 +114,7 @@ class TodayTests_ForecastApp: XCTestCase {
     func testGettingShareUrl(){
         let cityData = jpLocationServiceCityAndLocation(name: "Sunnyvale, United States", latitude: 37.337627159999997, longitude: -122.03976311)
         
-        XCTAssert(URL(string: "http://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=\(cityData.latitude)&lon=\(cityData.longitude)&zoom=8") == jpWeatherService.instance.getShareDataUrl(latitude: cityData.latitude, longitude: cityData.longitude))
+        XCTAssert(URL(string: "http://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=\(cityData.latitude)&lon=\(cityData.longitude)&zoom=8") == jpWeatherService.getShareDataUrl(latitude: cityData.latitude, longitude: cityData.longitude))
     }
     
     /**
@@ -123,7 +123,7 @@ class TodayTests_ForecastApp: XCTestCase {
      Needs internet connection
      */
     func testGettingDataAboutWeather(){
-        var weather: jpWeatherServiceToday?
+        var weather: ForecastToday?
         let cityData = jpLocationServiceCityAndLocation(name: "Sunnyvale, United States", latitude: 37.337627159999997, longitude: -122.03976311)
         
         autoreleasepool {
@@ -136,6 +136,6 @@ class TodayTests_ForecastApp: XCTestCase {
         }
         
         XCTAssertEqual(cityData.name, weather?.cityName)
-        XCTAssertEqual(jpWeatherService.instance.getShareDataUrl(latitude: cityData.latitude, longitude: cityData.longitude), weather?.mapUrl)
+        XCTAssertEqual(jpWeatherService.getShareDataUrl(latitude: cityData.latitude, longitude: cityData.longitude), weather?.mapUrl)
     }
 }

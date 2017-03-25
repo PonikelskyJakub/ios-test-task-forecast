@@ -53,7 +53,6 @@ All graphic elements and assets are located in "Description" folder as this docu
 ##Posible improvements
 - Title of Forecast section from Core Data.
 - Stop task getting data before new one.
-- Move some function to libs or make them static.
 - Unit tests for Forecast section (protocol for Core Data saving).
 - Unit test for Observable.mapLocationToCityName extension.
 - Landscape mode of app.
