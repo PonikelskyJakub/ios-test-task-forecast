@@ -24,6 +24,12 @@ enum jpWeatherServiceForecastType: Int {
     case fiveDays
 }
 
+protocol jpWeatherServiceWeekDataStore {
+    func deleteAllData() throws -> Void
+    func saveLocationData(appName: String, name: String, country: String, id: Int, latitude: Double, longitude: Double) throws -> Void
+    func saveWeatherDataForTime(datetime: Int, temperature: Double, wearherDesc: String, wearherIcon: String, wearherText: String) throws -> Void
+}
+
 class jpWeatherService: NSObject {
     
     /// Singleton instance of jpWeatherService
@@ -160,9 +166,10 @@ class jpWeatherService: NSObject {
      Gets data from OWM JSON and jpLocationServiceCityAndLocation object and save it to Core Data
      - Parameter json: OWM JSON
      - Parameter city: City name, longitude, latitude
+     - Parameter store: Store for weather data
      - Throws: jpWeatherServiceError.badDataFormat if some value is incorrect or missing (check detail text)
      */
-    class func storeWeekForecastData(json: [String:Any], city: jpLocationServiceCityAndLocation) throws -> Void {
+    class func storeWeekForecastData(json: [String:Any], city: jpLocationServiceCityAndLocation, store: jpWeatherServiceWeekDataStore) throws -> Void {
         guard let cityJson = json["city"] as? [String: Any] else {
             throw jpWeatherServiceError.badDataFormat(detail: "Missing 'city' property")
         }
@@ -180,9 +187,9 @@ class jpWeatherService: NSObject {
         }
     
         do {
-            try jpCoreDataService.instance.deleteAllWeatherData()
+            try store.deleteAllData()
             
-            try jpCoreDataService.instance.saveForecastCityObject(appName: city.name, name: cityNameJson, country: cityCountryJson, id: cityIdJson, latitude: city.latitude, longitude: city.longitude)
+            try store.saveLocationData(appName: city.name, name: cityNameJson, country: cityCountryJson, id: cityIdJson, latitude: city.latitude, longitude: city.longitude)
         } catch {
             throw jpWeatherServiceError.badDataFormat(detail: "Storing in Core Data problem")
         }
@@ -226,7 +233,7 @@ class jpWeatherService: NSObject {
                 }
                 
                 do {
-                    try jpCoreDataService.instance.saveForecastTimeDetailObject(datetime: dateTime, temperature: temp, wearherDesc: weatherDesc, wearherIcon: jpWeatherService.sourceImageNameToAppImageName(weatherCode), wearherText: weatherDescDetail.capitalized)
+                    try store.saveWeatherDataForTime(datetime: dateTime, temperature: temp, wearherDesc: weatherDesc, wearherIcon: jpWeatherService.sourceImageNameToAppImageName(weatherCode), wearherText: weatherDescDetail.capitalized)
                 } catch {
                     throw jpWeatherServiceError.badDataFormat(detail: "Storing in Core Data problem")
                 }
@@ -331,7 +338,7 @@ class jpWeatherService: NSObject {
                 
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
-                    try jpWeatherService.storeWeekForecastData(json: json, city: cityData)
+                    try jpWeatherService.storeWeekForecastData(json: json, city: cityData, store: jpCoreDataService.instance)
                     observer.on(.completed)
                 } catch let errorBDF as jpWeatherServiceError {
                     observer.on(.error(errorBDF))

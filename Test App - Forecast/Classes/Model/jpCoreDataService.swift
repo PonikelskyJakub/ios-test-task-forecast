@@ -82,14 +82,14 @@ class jpCoreDataService: NSObject {
     }
 }
 
-// MARK: - jpWeatherService support
+// MARK: - jpWeatherService support helpers
 
 extension jpCoreDataService {
     /**
      Delete all entities of given type
      - Parameter entityName: Entity name
      */
-    private func deleteEntityData(entityName: String) throws -> Void {
+    fileprivate func deleteEntityData(entityName: String) throws -> Void {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         fetchRequest.returnsObjectsAsFaults = false
         
@@ -100,11 +100,15 @@ extension jpCoreDataService {
             self.managedObjectContext.delete(managedObjectData)
         }
     }
-    
+}
+
+// MARK: - jpWeatherServiceWeekDataStore support
+
+extension jpCoreDataService: jpWeatherServiceWeekDataStore {
     /**
      Delete all entities of forecast
      */
-    public func deleteAllWeatherData() throws -> Void {
+    internal func deleteAllData() throws -> Void {
         try self.deleteEntityData(entityName: "ForecastCity")
         try self.deleteEntityData(entityName: "ForecastTimemark")
     }
@@ -118,7 +122,7 @@ extension jpCoreDataService {
      - Parameter latitude: Position latitude
      - Parameter longitude: Position longitude
      */
-    public func saveForecastCityObject(appName: String, name: String, country: String, id: Int, latitude: Double, longitude: Double) throws -> Void {
+    internal func saveLocationData(appName: String, name: String, country: String, id: Int, latitude: Double, longitude: Double) throws -> Void {
         let entity =
             NSEntityDescription.entity(forEntityName: "ForecastCity",
                                        in: self.managedObjectContext)!
@@ -140,7 +144,7 @@ extension jpCoreDataService {
      - Parameter wearherIcon: Icon of weather
      - Parameter wearherText: Long weather text
      */
-    public func saveForecastTimeDetailObject(datetime: Int, temperature: Double, wearherDesc: String, wearherIcon: String, wearherText: String) throws -> Void {
+    internal func saveWeatherDataForTime(datetime: Int, temperature: Double, wearherDesc: String, wearherIcon: String, wearherText: String) throws -> Void {
         let entity =
             NSEntityDescription.entity(forEntityName: "ForecastTimemark",
                                        in: self.managedObjectContext)!
