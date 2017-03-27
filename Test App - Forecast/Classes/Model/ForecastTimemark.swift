@@ -19,6 +19,26 @@ struct ForecastTimemark {
     var weather_text: String
 }
 
+extension ForecastTimemark {
+    /**
+     Transform current date (int value) to formatted string
+     - Returns: Date as formatted string
+     */
+    func getDateInFormat() -> String{
+        let date = NSDate(timeIntervalSince1970: Double(self.datetime))
+        let dayTimePeriodFormatter = DateFormatter()
+        dayTimePeriodFormatter.dateFormat = NSLocalizedString("DATEFORMAT_TABLE_WEATHER", comment: "Date format of weather")
+        return dayTimePeriodFormatter.string(from: date as Date)
+    }
+    
+    /**
+     Transform current temperature (double value) to formatted string
+     - Returns: Temperature as formatted string
+     */
+    func getTemperatureString() -> String{
+        return String(format: "%.1f%@", self.temperature, NSLocalizedString("TEMP_UNIT_DC", comment: "Degrees Celsius"))
+    }
+}
 
 extension ForecastTimemark : Equatable {
     /// Comparation of two ForecastTimemark struct
@@ -64,24 +84,5 @@ extension ForecastTimemark : Persistable {
             try entity.managedObjectContext?.save()
         } catch {
         }
-    }
-    
-    /**
-     Transform current date (int value) to formatted string
-     - Returns: Date as formatted string
-     */
-    func getDateInFormat() -> String{
-        let date = NSDate(timeIntervalSince1970: Double(self.datetime))
-        let dayTimePeriodFormatter = DateFormatter()
-        dayTimePeriodFormatter.dateFormat = NSLocalizedString("DATEFORMAT_TABLE_WEATHER", comment: "Date format of weather")
-        return dayTimePeriodFormatter.string(from: date as Date)
-    }
-    
-    /**
-     Transform current temperature (double value) to formatted string
-     - Returns: Temperature as formatted string
-     */
-    func getTemperatureString() -> String{
-        return String(format: "%.1f%@", self.temperature, NSLocalizedString("TEMP_UNIT_DC", comment: "Degrees Celsius"))
     }
 }

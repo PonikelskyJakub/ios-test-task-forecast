@@ -14,7 +14,6 @@ struct Config {
     }
     
     struct openWeatherMap {
-        static let apiUrl = "http://api.openweathermap.org/data/2.5"
         static let appId = "XXX"
 
         static let mapUrl = "http://openweathermap.org/weathermap"

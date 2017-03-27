@@ -244,12 +244,14 @@ class jpWeatherService: NSObject {
      - Returns: Correct URL
      */
     class func getSourceDataUrl(latitude: Double, longitude: Double, forecastType: jpWeatherServiceForecastType) -> URL{
+        let url: String
         switch forecastType {
         case jpWeatherServiceForecastType.fiveDays:
-            return URL(string: "\(Config.openWeatherMap.apiUrl)/forecast?lat=\(latitude)&lon=\(longitude)&appid=\(Config.openWeatherMap.appId)&units=metric")!
+            url = "\(URLProvider.shared.url(for: .fiveDays))&lat=\(latitude)&lon=\(longitude)"
         case jpWeatherServiceForecastType.today:
-            return URL(string: "\(Config.openWeatherMap.apiUrl)/weather?lat=\(latitude)&lon=\(longitude)&appid=\(Config.openWeatherMap.appId)&units=metric")!
+            url = "\(URLProvider.shared.url(for: .today))&lat=\(latitude)&lon=\(longitude)"
         }
+        return URL(string: url)!
     }
     
     /**
