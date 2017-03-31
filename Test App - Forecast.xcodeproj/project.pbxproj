@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3B0587AD1E5C761F008301CB /* ForecastTimemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0587AC1E5C761F008301CB /* ForecastTimemark.swift */; };
+		3B3D051D1E8E947700EC7457 /* ForecatsTests_ForecastApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3D051C1E8E947700EC7457 /* ForecatsTests_ForecastApp.swift */; };
 		3B4568111E267A5000A5ADE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4568101E267A5000A5ADE8 /* AppDelegate.swift */; };
 		3B4568161E267A5000A5ADE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B4568141E267A5000A5ADE8 /* Main.storyboard */; };
 		3B4568191E267A5000A5ADE8 /* Test_App___Forecast.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B4568171E267A5000A5ADE8 /* Test_App___Forecast.xcdatamodeld */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		3B0587AC1E5C761F008301CB /* ForecastTimemark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastTimemark.swift; sourceTree = "<group>"; };
+		3B3D051C1E8E947700EC7457 /* ForecatsTests_ForecastApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecatsTests_ForecastApp.swift; sourceTree = "<group>"; };
 		3B45680D1E267A5000A5ADE8 /* Test App - Forecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test App - Forecast.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4568101E267A5000A5ADE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B4568151E267A5000A5ADE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			children = (
 				3B45682A1E267A5000A5ADE8 /* Info.plist */,
 				3B4BCAA81E4C79E9000762AA /* TodayTests_ForecastApp.swift */,
+				3B3D051C1E8E947700EC7457 /* ForecatsTests_ForecastApp.swift */,
 			);
 			path = "Test App - ForecastTests";
 			sourceTree = "<group>";
@@ -524,6 +527,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B4BCAA91E4C79E9000762AA /* TodayTests_ForecastApp.swift in Sources */,
+				3B3D051D1E8E947700EC7457 /* ForecatsTests_ForecastApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
