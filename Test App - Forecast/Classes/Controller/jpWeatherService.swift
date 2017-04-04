@@ -271,6 +271,9 @@ class jpWeatherService: NSObject {
         return URL(string: "\(Config.openWeatherMap.mapUrl)?basemap=map&cities=true&layer=temperature&lat=\(latitude)&lon=\(longitude)&zoom=8")!
     }
     
+    /// Only last open weather map task makes sence to load
+    private var owmDownloadTask: URLSessionDataTask?
+
     /**
      Returns observable for checking current weather for city from parameter cityData
      
@@ -282,8 +285,12 @@ class jpWeatherService: NSObject {
      */
     public func getTodayForecastObservable(cityData: jpLocationServiceCityAndLocation) -> Observable<ForecastToday> {
         return Observable.create{ observer in
+            if let owmDownloadTask = self.owmDownloadTask {
+                owmDownloadTask.cancel()
+            }
+            
             let url = jpWeatherService.getSourceDataUrl(latitude: cityData.latitude, longitude: cityData.longitude, forecastType: jpWeatherServiceForecastType.today)
-            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            self.owmDownloadTask = URLSession.shared.dataTask(with: url) { data, response, error in
                 guard error == nil else {
                     observer.on(.error(jpWeatherServiceError.urlRequestProblem))
                     return
@@ -306,10 +313,10 @@ class jpWeatherService: NSObject {
                     return
                 }
             }
-            task.resume()
+            self.owmDownloadTask?.resume()
             
             return Disposables.create {
-                task.cancel()
+                self.owmDownloadTask?.cancel()
             }
         }
     }
@@ -324,8 +331,12 @@ class jpWeatherService: NSObject {
      */
     public func getWeekForecastObservable(cityData: jpLocationServiceCityAndLocation) -> Observable<Bool> {
         return Observable.create{ observer in
+            if let owmDownloadTask = self.owmDownloadTask {
+                owmDownloadTask.cancel()
+            }
+            
             let url = jpWeatherService.getSourceDataUrl(latitude: cityData.latitude, longitude: cityData.longitude, forecastType: jpWeatherServiceForecastType.fiveDays)
-            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            self.owmDownloadTask = URLSession.shared.dataTask(with: url) { data, response, error in
                 guard error == nil else {
                     observer.on(.error(jpWeatherServiceError.urlRequestProblem))
                     return
@@ -348,10 +359,10 @@ class jpWeatherService: NSObject {
                     return
                 }
             }
-            task.resume()
+            self.owmDownloadTask?.resume()
             
             return Disposables.create {
-                task.cancel()
+                self.owmDownloadTask?.cancel()
             }
         }
     }
